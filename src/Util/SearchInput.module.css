@@ -1,0 +1,26 @@
+.search-input {
+  max-width: 750px;
+  min-width: 250px;
+  width: 70%;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid rgb(204, 202, 204);
+  height: 40px;
+  padding: 2px 15px;
+  transition: 0.3s ease ;
+  background-color: var(--bg-1-trans);
+  color: rgb(243, 243, 243);
+  font-size: 16px;;
+}
+
+.search-input:hover,
+.search-input:active {
+  scale: 1.07;
+}
+@media (max-width: 600px) {
+  /* Adjust the breakpoint and styles for smaller screens */
+  .search-input {
+    height: 30px;;
+  }
+}
+

@@ -1,0 +1,38 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  max-height: 120px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  gap: 20px;
+  background: var(--bg-1);
+}
+.logo-img {
+  max-height: 65px;
+  max-width: 65px;
+  padding: 0px 5px;
+  padding-top: 5px;
+}
+.user-img {
+  max-height: 40px;
+  max-width: 40px;
+  padding: 0px 5px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  /* Adjust the breakpoint and styles for smaller screens */
+  .logo-img {
+    max-width: 30px;
+  }
+  .header-container {
+    padding-left: 10px;
+  }
+  .user-img {
+  max-height: 25px;
+  max-width: 25px;
+
+}
+}

@@ -1,0 +1,19 @@
+:root {
+  --bg-1: #252B48;
+  --bg-2: #374055;
+  --bg-3: #445069;
+  
+  --bg-1-tran: #252b4895;
+  --bg-2--tran: #374055ae;
+  --bg-3--tran: #4450698d;
+  
+  --text-1: #499381;
+  --text-2: #59bea6;
+  --text-3: #7dc9b7;
+
+  --heading-1 : #d6c43a;
+  --heading-2 : #cdbf55;
+  --heading-3 : #e4d773;
+
+
+}

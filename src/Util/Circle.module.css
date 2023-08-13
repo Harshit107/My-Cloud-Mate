@@ -1,0 +1,6 @@
+.circle {
+    background-color: #ffffff; /* Change to desired color */
+    border-radius: 50%;
+    border: 1px solid var(--text-1); /* Makes the element circular */
+    margin: 10px;
+  }

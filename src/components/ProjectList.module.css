@@ -1,11 +1,17 @@
 .project-list {
   overflow-y: scroll;
   padding: 5px;
-  height: 400px;
   margin: 10px 0;
   border-radius: 20px;
+  height: calc(100% - 100px);
+  
 }
+p{
+  text-align: center;
+  margin-top: 10px;
+  color: aliceblue;
 
+}
 .ul {
   list-style: none;
   padding: 0;
@@ -23,9 +29,11 @@
   white-space: nowrap;       /* Prevents text from wrapping to the next line */
   overflow: hidden;          /* Hides any overflow beyond the defined width */
   text-overflow: ellipsis; 
+  height: 40px;
+  align-items: center;
 }
 
 .ul li:hover,
 .ul li:active {
-background-color: var(--heading-1);
+background-color: var(--heading-0);
 }

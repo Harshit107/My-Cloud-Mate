@@ -1,8 +1,23 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
 .side-section {
-    max-width: 25%;
+    width: 25%;
     min-width: 200px;
     border-top-right-radius: 20px;
     padding: 5px 10px;
     box-sizing: border-box; /* Ensure consistent box sizing */
     height: 100%;
+  }
+  .main-section {
+    width: 100%;
+    height: calc(100% - 100px);
+    background-color:var(--bg-3-trans);
+    padding: 10px;
+    margin: 20px 10px 0 10px;
+    border-radius: 10px;
+    overflow: scroll;
   }

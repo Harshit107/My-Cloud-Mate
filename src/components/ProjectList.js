@@ -1,27 +1,16 @@
 import classes from './ProjectList.module.css'
 
-const ProjectList = () => {
+const ProjectList = (props) => {
     return (
         <div className={classes['project-list']}>
-            <ul className={classes['ul']}>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-                <li>First Project</li>
-
-            </ul>
+            {!props.projects && <p>- No Project Found -</p>}
+            {props.projects &&
+                <ul className={classes['ul']}>
+                    {props.projects.map(project => (
+                        <li>{project.name}</li>
+                    ))}
+                </ul>
+            }
         </div>
 
     )

@@ -1,0 +1,8 @@
+.side-section {
+    max-width: 25%;
+    min-width: 200px;
+    border-top-right-radius: 20px;
+    padding: 5px 10px;
+    box-sizing: border-box; /* Ensure consistent box sizing */
+    height: 100%;
+  }

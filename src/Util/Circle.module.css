@@ -3,4 +3,6 @@
     border-radius: 50%;
     border: 1px solid var(--text-1); /* Makes the element circular */
     margin: 10px;
+    width: fit-content;
+    height: fit-content;
   }

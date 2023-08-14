@@ -1,12 +1,14 @@
 import MainHeader from "./components/MainHeader";
+import Projects from "./components/Projects";
+import classes from './App.module.css'
 
 
 function App() {
   return (
-   <>
-    <MainHeader/> 
-   </>
-
+    <div className={classes['homepage']}>
+      <MainHeader />
+      <Projects />
+    </div>
   );
 }
 

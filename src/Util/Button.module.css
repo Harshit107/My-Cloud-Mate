@@ -1,0 +1,48 @@
+
+.button {
+    width: 100%;
+    height: 40px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    background: var(--heading-3);
+    outline: none;
+    border: 0.5px solid wheat;
+    scale: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: -1px 3px 2px #fff;
+    font-size: 16px;
+
+}
+
+.button:hover, 
+.button:active {
+
+    background-color: var(--heading-1);
+    box-shadow: none;
+    transform: translateY(4px) translateX(-1px);
+
+    
+
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 10px;
+    align-items: center;
+}
+.button-span {
+    width: fit-content;
+    height: fit-content;
+    ;
+}
+
+.button-image {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+
+}

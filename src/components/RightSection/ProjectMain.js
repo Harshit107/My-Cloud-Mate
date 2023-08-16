@@ -1,5 +1,5 @@
 import ProjectContent from './ProjectContent';
-import ProjectHeader from '../ProjectHeader';
+import ProjectHeader from './ProjectHeader';
 import classes from './ProjectMain.module.css';
 
 

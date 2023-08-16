@@ -1,11 +1,12 @@
 
 import FileContext from './file-context';
 import { useReducer } from 'react';
-import DUMMY_FILES from '../components/DummyFiles'
+import DUMMY_FILES, { PROJECT } from '../components/DummyFiles'
 
 
 const defaultState = {
     files : DUMMY_FILES,
+    projects: PROJECT,
     availableFiles : DUMMY_FILES
 }
 
@@ -15,7 +16,8 @@ const fileReducer = (state, action) => {
         const filterFiles =  state.files.filter(file => file.name.toLowerCase().includes(action.filename.toLowerCase()))
         return {
             files : state.files,
-            availableFiles : filterFiles
+            availableFiles : filterFiles,
+            projects : state.projects
         }
     }
 
@@ -40,6 +42,7 @@ const FileProvider = (props) => {
     const filesState = {
         files : DUMMY_FILES,
         availableFiles : files.availableFiles,
+        projects : PROJECT,
         searchFiles : searchFileHandler
     }
     return <FileContext.Provider value={filesState}>

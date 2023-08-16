@@ -1,7 +1,7 @@
 // Search.js
-import SearchInput from "../Util/SearchInput";
+import SearchInput from "../../Util/SearchInput";
 import { useContext } from 'react';
-import availableFilesContext from '../store/file-context';
+import availableFilesContext from '../../store/file-context';
 
 const Search = (props) => {
 

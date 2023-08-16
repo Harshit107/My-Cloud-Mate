@@ -1,10 +1,10 @@
 
-
-const files = [
+let files = [
     {
+
         id: '1',
-        name: 'Introduction Introduction Introduction Introduction Introduction ',
-        type: 'Document',
+        name: 'Introduction to chrome ',
+        type: 'PDF',
         modified: '02-07-1999',
         created: '01-07-1999',
         prodect: 'projectId'
@@ -13,7 +13,7 @@ const files = [
     {
         id: '2',
         name : 'Installation',
-        type : 'PNG',
+        type : 'PDF',
         modified : '02-07-1999',
         created : '01-07-1999',
         prodect: 'projectId'
@@ -22,7 +22,7 @@ const files = [
     {
         id: '21',
         name: 'Introduction Introduction Introduction Introduction Introduction ',
-        type: 'Document',
+        type: 'PDF',
         modified: '02-07-1999',
         created: '01-07-1999',
         prodect: 'projectId'
@@ -57,4 +57,22 @@ const files = [
     },
 ]
 
+files = []
+
 export default files;
+
+const PROJECT = [
+    {
+        id : 123,
+        name : "Harshit"
+    },
+    {
+        id : 12,
+        name : "Harshit"
+    },
+    {
+        id : 1,
+        name : "Harshit"
+    },
+]
+export {PROJECT}

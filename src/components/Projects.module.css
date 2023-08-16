@@ -15,7 +15,7 @@
   .main-section {
     width: 100%;
     height: calc(100% - 100px);
-    background-color:var(--bg-3-trans);
+    background-color:var(--bg-2-trans);
     padding: 10px;
     margin: 20px 10px 0 10px;
     border-radius: 10px;

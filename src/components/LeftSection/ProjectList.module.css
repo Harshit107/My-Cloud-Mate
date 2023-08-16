@@ -4,6 +4,7 @@
   margin: 10px 0;
   border-radius: 20px;
   height: calc(100% - 100px);
+  font-weight: 200;
   
 }
 p{
@@ -20,10 +21,10 @@ p{
 
 .ul li {
   margin: 5px 0;
-  padding: 5px 20px;
+  padding: 8px 20px;
   background-color: var(--bg-3-trans);
   color: white;
-  border: none;
+  border: 0.5px solid var(--border-while-light);
   border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;       /* Prevents text from wrapping to the next line */
@@ -35,5 +36,5 @@ p{
 
 .ul li:hover,
 .ul li:active {
-background-color: var(--heading-0);
+background-color: var(--text-1);
 }

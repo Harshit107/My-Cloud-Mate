@@ -5,25 +5,23 @@
     margin-top: 15px;
     margin-bottom: 10px;
     border-radius: 30px;
-    background: var(--heading-3);
+    background: var(--text-3);
     outline: none;
     border: 0.5px solid wheat;
     scale: 1;
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: -1px 3px 2px #fff;
+    /* box-shadow: -1px 3px  #3b9238e7; */
+    box-shadow: -1px 3px  var(--text-1);
     font-size: 16px;
-
 }
 
 .button:hover, 
 .button:active {
 
-    background-color: var(--heading-1);
+    background-color: var(--text-1);
     box-shadow: none;
-    transform: translateY(4px) translateX(-1px);
-
-    
+    transform: translateY(4px) translateX(-1px);    
 
 }
 
@@ -33,16 +31,19 @@
     justify-content: left;
     gap: 10px;
     align-items: center;
+    padding-right: 30px;
+    padding-left: 10px;
+    padding-top: 5px;
 }
 .button-span {
     width: fit-content;
     height: fit-content;
-    ;
+    
 }
 
 .button-image {
     width: 25px;
     height: 25px;
     margin-left: 10px;
-
+    margin-top: 3px;
 }

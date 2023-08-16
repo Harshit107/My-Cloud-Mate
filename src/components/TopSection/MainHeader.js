@@ -1,11 +1,14 @@
-import Circle from '../Util/Circle';
-import gifLogo from '../images/my-cloud-mate-logo.gif'
-import userImage from '../images/user.png';
+import Circle from '../../Util/Circle';
+import gifLogo from '../../images/my-cloud-mate-logo.gif'
+import userImage from '../../images/user.png';
 import classes from './MainHeader.module.css'
-import Search from './Search';
+import Search from '../Search';
+
 
 const MainHeader = (props) => { 
 
+  
+  
    return (
      <div className={classes["header-container"]}>
        <Circle>

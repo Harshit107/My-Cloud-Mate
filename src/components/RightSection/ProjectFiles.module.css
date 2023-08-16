@@ -1,0 +1,80 @@
+.project-files {
+    height: 70px;
+    width: 100%;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin: 10px 0px;
+    background-color: var(--bg-3-trans); 
+    border-radius: 5px;
+    overflow: hidden;
+    justify-content: space-evenly;
+
+    font-size: 20px;
+    align-items: center;
+    transition: 0.3s ease;
+    cursor: pointer;
+    font-weight: 100;
+  
+}
+
+.project-files:not(.none):hover {
+   scale: 1.01;
+   background-color: var(--bg-1);
+}
+
+.files-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.name {
+    width: 40%;
+    text-align: left;
+    white-space: nowrap;       /* Prevents text from wrapping to the next line */
+    overflow: hidden;          /* Hides any overflow beyond the defined width */
+    text-overflow: ellipsis; 
+    font-weight: 200;
+    
+}
+p {
+    margin: 0px;
+}
+
+.none {
+    height: 30px;
+    color: blanchedalmond;
+    font-size: 16px;
+    background-color: var(--bg-1);
+    border: 0.5px solid rgba(255, 255, 255, 0.486);
+    position: sticky;
+    top: -10px;
+    left: 0;
+    z-index: 1;
+    padding: 15px 0px;
+    margin-bottom: 20px;
+}
+
+
+.type {
+    width: 100px;
+    text-align: left;
+}
+
+
+.PDF {
+    border: 0.2px solid rgb(228, 113, 132);
+}
+
+.JPG {
+    border: 0.2px solid rgb(207, 131, 16);
+}
+.PNG {
+    border: 0.2px solid rgb(16, 121, 182);
+}
+
+.Document {
+    border: 0.2px solid rgb(192, 139, 23);
+}
+

@@ -7,7 +7,7 @@ const ProjectList = (props) => {
             {props.projects &&
                 <ul className={classes['ul']}>
                     {props.projects.map(project => (
-                        <li>{project.name}</li>
+                        <li key={Math.random(5)}>{project.name}</li>
                     ))}
                 </ul>
             }

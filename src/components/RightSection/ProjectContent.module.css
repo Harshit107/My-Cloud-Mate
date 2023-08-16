@@ -1,0 +1,12 @@
+.project-content-container {
+    width: 100%;
+    flex-grow: 1;
+    padding: 10px;
+    overflow: scroll;
+}
+
+.files-not-found {
+    font-size: 20px;
+    margin-top: 50px;
+    color: #ccc;
+}

@@ -42,9 +42,31 @@ p {
   transition: 0.1s ease;
 }
 
-.ul li:hover,
-.ul li:active {
+
+
+.ul li:hover{
   background-color: var(--text-1);
   font-weight: 400;
   scale: 1.03;
 }
+.ul li.active {
+  background: linear-gradient(90deg, var(--text-1), var(--text-3), var(--text-2));
+  background-size: 200% 200%;
+  animation: gradientAnimation 3s infinite;
+  font-weight: 400;
+
+}
+
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+

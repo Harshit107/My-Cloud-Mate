@@ -4,10 +4,14 @@ import FileContext from '../../store/file-context'
 
 const ProjectList = (props) => {
     const ctx = useContext(FileContext);
-    console.log(ctx.projects)
     const projects = ctx.projects
+    const activeProjectId = ctx.activeProjectId;
+    function handleProjectClicked(id) {
+        ctx.selectedFilesFun(id)
+    }
+
     return (
-        <div className={classes['project-list']}>
+        <div className = {classes['project-list']}>
             {projects.length === 0 && <p className={classes['no-project-found']}>
                 No Project Found</p>
                 
@@ -18,8 +22,11 @@ const ProjectList = (props) => {
             }
             {projects &&
                 <ul className={classes['ul']}>
-                    {projects.map(project => (
-                        <li key={project.id}>{project.name}</li>
+                    {projects.map(project => (                        
+                        <li key={project.id}
+                         className={project.id === activeProjectId ? classes['active'] : ''}
+                         onClick={handleProjectClicked.bind(null,project.id)}
+                         >{project.name}</li>
                     ))}
                 </ul>
             }

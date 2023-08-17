@@ -56,7 +56,9 @@ p {
     padding: 25px 0px;
     margin-bottom: 20px;
 }
-
+p {
+    color:  white;
+}
 
 .type {
     width: 100px;

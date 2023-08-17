@@ -16,6 +16,8 @@ const SearchInput = (props) => {
       className={classes["search-input"]}
       placeholder="Search"
       onChange={handleSearchInputChange}
+      value={props.value}
+      disabled = {props.disabled}
     />
   );
 };

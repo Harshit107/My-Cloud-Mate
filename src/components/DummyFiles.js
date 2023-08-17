@@ -7,16 +7,18 @@ let files = [
         type: 'PDF',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId'
+        prodect: 'projectId',
+        projectId: 0
 
     },
     {
         id: '2',
-        name : 'Installation',
-        type : 'PDF',
-        modified : '02-07-1999',
-        created : '01-07-1999',
-        prodect: 'projectId'
+        name: 'Installation',
+        type: 'PDF',
+        modified: '02-07-1999',
+        created: '01-07-1999',
+        prodect: 'projectId',
+        projectId: 12
 
     },
     {
@@ -25,16 +27,18 @@ let files = [
         type: 'PDF',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId'
+        prodect: 'projectId',
+        projectId: 12
 
     },
     {
         id: '22',
-        name : 'Installation',
-        type : 'PNG',
-        modified : '02-07-1999',
-        created : '01-07-1999',
-        prodect: 'projectId'
+        name: 'Installation Of AC',
+        type: 'PNG',
+        modified: '02-07-1999',
+        created: '01-07-1999',
+        prodect: 'projectId',
+        projectId: 1
 
     },
     {
@@ -43,36 +47,38 @@ let files = [
         type: 'Document',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId'
+        prodect: 'projectId',
+        projectId: 123
 
     },
     {
         id: '212',
-        name : 'Installation',
-        type : 'PNG',
-        modified : '02-07-1999',
-        created : '01-07-1999',
-        prodect: 'projectId'
+        name: 'Installation',
+        type: 'PNG',
+        modified: '02-07-1999',
+        created: '01-07-1999',
+        prodect: 'projectId',
+        projectId: 123
 
     },
 ]
 
+let PROJECT = [
+    { id: 0, name: 'Starter Project' }, //this is permanent
+    {
+        id: 123,
+        name: "Portofio"
+    },
+    {
+        id: 12,
+        name: "House Document"
+    },
+    {
+        id: 1,
+        name: "Privacy"
+    },
+]
 files = []
-
 export default files;
 
-const PROJECT = [
-    {
-        id : 123,
-        name : "Harshit"
-    },
-    {
-        id : 12,
-        name : "Harshit"
-    },
-    {
-        id : 1,
-        name : "Harshit"
-    },
-]
-export {PROJECT}
+export { PROJECT }

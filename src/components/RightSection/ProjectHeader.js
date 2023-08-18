@@ -16,7 +16,10 @@ const ProjectHeader = () => {
         <div className={classes["project-header"]}>
             <div className={classes["project-header-action"]}>
                 
-                <ButtonWithAddIcon className={classes['button-upload-file']} image={uploadIcon} buttonName="Upload File"/>
+                <ButtonWithAddIcon 
+                    className={classes['button-upload-file']}
+                    image={uploadIcon} buttonName="Upload File"/>
+                    
                 { isFilesAvailable && <ButtonWithAddIcon 
                     className={classes['button-upload-file']}
                     image={sortIcon} 

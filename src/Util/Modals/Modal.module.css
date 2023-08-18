@@ -1,0 +1,13 @@
+.modal {
+    width: 400px;
+    height: 400px;
+    ;
+    background-color: var(--bg-1);
+    /* background-color: var(--border-white); */
+    border-radius: 20px;
+    padding: 20px;
+    /* box-shadow: 0 0 2px 7px #acabab67; */
+    border: 2px solid var(--text-1);
+    pointer-events: auto;
+    
+}

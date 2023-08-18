@@ -11,9 +11,9 @@ const ProjectList = (props) => {
     }
 
     return (
-        <div className = {classes['project-list']}>
-            {projects.length === 0 && <p className={classes['no-project-found']}>
-                No Project Found</p>
+        <div className = {classes['project-list']}>            
+            {
+            projects.length === 0 && <p className={classes['no-project-found']}> No Project Found</p>
                 
             }
             {projects.length === 0 && <p className={classes['no-project-found']}>

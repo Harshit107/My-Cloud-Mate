@@ -2,15 +2,23 @@
 import FileContext from './file-context';
 import { useEffect, useReducer } from 'react';
 import DUMMY_FILES, { PROJECT } from '../components/DummyFiles'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '../Helper/LocalStorage';
 
 
 
-const defaultState = {
-    files: DUMMY_FILES,
-    activeProjectId: 0,
-    projects: PROJECT,
-    availableFiles: DUMMY_FILES
-}
+const defaultState = getDataFromLocalStorage() || {
+        files: [],
+        activeProjectId: 0,
+        projects: PROJECT,
+        availableFiles: DUMMY_FILES
+    }
+
+// const defaultState = {
+//     files: [],
+//     activeProjectId: 0,
+//     projects: PROJECT,
+//     availableFiles: DUMMY_FILES
+// }
 
 const fileReducer = (state, action) => {
 
@@ -47,7 +55,7 @@ const fileReducer = (state, action) => {
             projects : newProjects
         }
     }
-
+    
     if(action.type === 'REMOVE_PROJECT') {
         const newProjects = state.projects.filter(project => project.id !== action.id);
         const activeProjectId = 0;
@@ -59,6 +67,19 @@ const fileReducer = (state, action) => {
         }
     }
 
+    if(action.type === 'ADD_FILE') {
+
+        const allFiles = state.files.concat(action.file);
+        const availableFiles = state.availableFiles.concat(action.file);
+        return  {
+            activeProjectId: state.activeProjectId,
+            files: allFiles,
+            availableFiles: availableFiles,
+            projects : state.projects
+        }
+    }
+
+
     return defaultState;
 
 
@@ -69,6 +90,8 @@ const FileProvider = (props) => {
 
     const [filesStore, dispatchfiles] = useReducer(fileReducer, defaultState);
 
+    setDataToLocalStorage(filesStore)
+
     const searchFileHandler = (text) => {
         dispatchfiles({
             type: 'search',
@@ -76,7 +99,7 @@ const FileProvider = (props) => {
 
         })
     }
-    const selectFilesHandler = (id) => {
+    const selectProjectHandler = (id) => {
         dispatchfiles({
             type: 'SELECT_PROJECT',
             id: id,
@@ -85,6 +108,7 @@ const FileProvider = (props) => {
     
 
     const addNewFileHandler = (file) => {
+        
         dispatchfiles({
             type: 'ADD_FILE',
             file: file,
@@ -109,22 +133,21 @@ const FileProvider = (props) => {
 
 
 
-    const filesState = {
+    const filesState =   {
         activeProjectId: filesStore.activeProjectId,
-        files: DUMMY_FILES,
+        files: filesStore.files,
         availableFiles: filesStore.availableFiles,
         projects: filesStore.projects,
         searchFiles: searchFileHandler,
-        selectedFilesFun: selectFilesHandler,
+        selectedFilesFun: selectProjectHandler,
         addNewProject : addNewProjectHandler,
         addNewFile : addNewFileHandler,
         removeProject : removeProjectHandler
 
     }
-
     useEffect(() => {
-        selectFilesHandler(0);
-    }, [])
+        selectProjectHandler(filesState.activeProjectId);
+    }, [filesState.activeProjectId])
 
 
     return <FileContext.Provider value={filesState}>

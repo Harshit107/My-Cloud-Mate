@@ -6,7 +6,7 @@ const Modal = (props) => {
        <Backdrop removeBackdrop = {props.removeBackdrop}>
 
             <div className={classes.modal} onClick={(event) => {event.stopPropagation(); }}>
-                <h2>Create Project</h2>
+                <h2>{props.title}</h2>
                 {props.children}
             </div>
        </Backdrop>

@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import availableFilesContext from '../../store/file-context';
 
 
-const ProjectContent = (props) => {
+const ProjectContent = () => {
     
     const ctx = useContext(availableFilesContext);
     const files = ctx.availableFiles;

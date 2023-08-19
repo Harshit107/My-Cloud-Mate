@@ -37,7 +37,6 @@ let files = [
         type: 'PNG',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId',
         projectId: 1
 
     },
@@ -47,7 +46,6 @@ let files = [
         type: 'Document',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId',
         projectId: 123
 
     },
@@ -57,7 +55,6 @@ let files = [
         type: 'PNG',
         modified: '02-07-1999',
         created: '01-07-1999',
-        prodect: 'projectId',
         projectId: 123
 
     },
@@ -65,18 +62,7 @@ let files = [
 
 let PROJECT = [
     { id: 0, name: 'Starter Project' }, //this is permanent
-    {
-        id: 123,
-        name: "Portofio"
-    },
-    {
-        id: 12,
-        name: "House Document"
-    },
-    {
-        id: 1,
-        name: "Privacy"
-    },
+    
 ]
 files = []
 // PROJECT = []

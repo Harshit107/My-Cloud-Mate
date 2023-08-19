@@ -5,8 +5,8 @@ import ProjectDetailModelData from "./ProjectDetailModalData"
 const FileDetailsModal = (props) => {
 
     return (
-        <Modal removeBackdrop = {props.removeBackdrop}>
-            <ProjectDetailModelData />
+        <Modal removeBackdrop = {props.removeBackdrop} title = "Upload New File">
+            <ProjectDetailModelData {...props}/>
         </Modal>
     )
 

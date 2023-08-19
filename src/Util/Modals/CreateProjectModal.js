@@ -15,56 +15,55 @@ const CreateProjectModal = (props) => {
     const ctx = useContext(FileContext);
 
 
-    function handleValueChange(e) { 
+    function handleValueChange(e) {
         setProjectName(e.target.value);
         setProjectNameEmpty(e.target.value.trim().length === 0)
     }
 
-    const addProjectToServer = async (name) => {
-        
+    const addProjectToServer = async () => {
+
         const uniqueId = uuidv4();
         setIsLoading(true)
-        ctx.addNewProject( {
-            id : uniqueId,
-            name : projectName
+        ctx.addNewProject({
+            id: uniqueId,
+            name: projectName
         })
-         setTimeout( () => {
-            props.removeBackdrop();
-            setIsLoading(false)
-        }, 1500 );
 
+        props.removeBackdrop();
+        setIsLoading(false)
+        ctx.selectedFilesFun(uniqueId);
     }
-    
+
     const handleBtnClick = () => {
-        if(projectName.trim() === '') {
+        if (projectName.trim() === '') {
             setProjectNameEmpty(true)
             return;
         }
         addProjectToServer();
 
-        
+
     }
     const inputData = {
-        input : {
-            name : 'Project Name',
-            type : "text",
-            placeholder : ' ',
-            value : projectName,
-            onChange : handleValueChange,
+        input: {
+            name: 'Project Name',
+            type: "text",
+            placeholder: ' ',
+            value: projectName,
+            onChange: handleValueChange,
         }
     }
 
 
     return (
-       <Modal removeBackdrop = {props.removeBackdrop}>
+        <Modal removeBackdrop={props.removeBackdrop} title="Create New Project">
             <p className={classes.p}>Create projects to categorize your files like folders just like you'd arrange documents in different folders on your desk. Separate your files for quick access and easy organization.</p>
-            <Input input = {inputData.input} />
-            {isProjectNameEmpty && <p className={classes.error}>Project Name Cannot be Empty</p> }
+            <Input input={inputData.input} />
+            {isProjectNameEmpty && <p className={classes.error}>Project Name Cannot be Empty</p>}
             <div className={classes.btnDiv}>
-                <Button onClick = { () => {props.removeBackdrop()}}  disabled = {isLoading} className={`${classes.btn} ${classes.cancelBtn}`}> Cancel</Button>
-                <Button onClick = {handleBtnClick}disabled = {isLoading} className={classes.btn}> Create</Button>
+                <Button onClick={() => { props.removeBackdrop() }} disabled={isLoading} className={`${classes.btn} ${classes.cancelBtn}`}> Cancel</Button>
+                <Button onClick={handleBtnClick} disabled={isLoading} className={classes.btn}> Create</Button>
             </div>
-       </Modal>
+        </Modal>
     )
 
 }

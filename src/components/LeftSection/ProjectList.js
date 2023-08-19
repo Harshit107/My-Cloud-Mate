@@ -4,21 +4,19 @@ import FileContext from '../../store/file-context'
 
 const ProjectList = (props) => {
     const ctx = useContext(FileContext);
+    console.log(ctx);
     const projects = ctx.projects
     const activeProjectId = ctx.activeProjectId;
     function handleProjectClicked(id) {
         ctx.selectedFilesFun(id)
     }
 
+
     return (
         <div className = {classes['project-list']}>            
-            {
-            projects.length === 0 && <p className={classes['no-project-found']}> No Project Found</p>
-                
-            }
-            {projects.length === 0 && <p className={classes['no-project-found']}>
-                Create one project to continue</p>
-                
+            
+            {projects.length === 1 && <p className={classes['no-project-found']}>
+             We've set up a default project for you to explore the features and get started. To keep your projects organized and separate, Press Create Project</p>                
             }
             {projects &&
                 <ul className={classes['ul']}>

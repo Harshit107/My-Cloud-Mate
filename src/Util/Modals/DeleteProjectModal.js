@@ -26,7 +26,7 @@ const DeleteProjectModal = (props) => {
 
 
     return (
-       <Modal removeBackdrop = {props.removeBackdrop}>
+       <Modal removeBackdrop = {props.removeBackdrop} title = "Delete Project">
             <p className={classes.p}>Are you sure you want to delete this project? Deleting this project will result in the removal of all files associated with it. Once deleted, these files cannot be retrieved. This action is irreversible</p>
             {isDeleteAllowed && <p className={`${classes.error} ${classes.p}`}>We appreciate your intent, but this is a default project that cannot be deleted. It plays an important role in our system and ensures smooth functionality</p> }
             <div className={classes.btnDiv}>

@@ -22,11 +22,12 @@ const ProjectHeader = () => {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+        console.log(file);
         setSelectedFile(file);
         event.target.value = null;
         setTimeout( () => {
             setSelectedFile(null);
-        },2000)
+        },20000)
 
       };
       const handleButtonClick = () => {
@@ -73,7 +74,7 @@ const ProjectHeader = () => {
             </div>
             <div>
                 {isDeleteClicked && <DeleteProjectModal removeBackdrop={() => setDeleteClicked(false)} id={selectedProject} />}
-                {selectedFile && <FileDetailModal removeBackdrop={() => setSelectedFile(null)} id={selectedProject} />}
+                {selectedFile && <FileDetailModal removeBackdrop={() => setSelectedFile(null)} id={selectedProject} selectedFile = {selectedFile}/>}
                 <ButtonWithAddIcon
                     action={{ onClick: handleDeleteProject }}
                     className={`${classes.button} ${classes['project-header-action-delete']}`}

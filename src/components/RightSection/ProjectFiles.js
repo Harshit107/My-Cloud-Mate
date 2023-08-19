@@ -7,7 +7,6 @@ import DocumentIcon from '../../images/document-icon.png'
 const iconStore = {
     "PDF" : PdfIcon,
     "JPG" : JpgIcon,
-    "Document" : DocumentIcon,
     "PNG" : PngIcon
 }
 
@@ -15,12 +14,13 @@ const ProjectFiles = (props) => {
 
     return (
         <div className={`${classes['project-files']} ${classes[props.type]}`}>
-           {props.type !== 'none' && <img src={iconStore[props.type]} alt='type icon' className={classes['files-icon']} />}
+           {props.type !== 'none' && <img src={iconStore[props.type.toUpperCase()] ?? DocumentIcon} alt='type icon' className={classes['files-icon']} />}
            {props.type === 'none' && <div className={classes['files-icon']}></div>}
            <p className={classes['name']}>{props.name }</p>
            <p className={classes['type']}>{props.type === 'none' ? 'File-type' : props.type}</p>
            <p>{props.modified}</p>
            <p>{props.created}</p>
+           {/* <p>{formattedDate(props.created)}</p> */}
           
         </div>
     )

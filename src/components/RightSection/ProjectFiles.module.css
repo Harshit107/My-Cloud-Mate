@@ -16,8 +16,9 @@
     transition: 0.3s ease;
     cursor: pointer;
     font-weight: 100;
-    border : 0.1px solid var(--border-white-light)
-  
+    border : 0.1px solid var(--border-white-light);
+    border-left: 0.2px solid rgb(192, 139, 23);
+
 }
 
 .project-files:not(.none):hover {
@@ -66,19 +67,14 @@ p {
 }
 
 
-.PDF {
+.pdf {
     border-left: 1px solid rgb(228, 113, 132);
 }
 
-.JPG {
+.jpg {
     border-left: 0.2px solid rgb(207, 131, 16);
     
 }
-.PNG {
+.png {
     border-left: 0.2px solid rgb(16, 121, 182);
 }
-
-.Document {
-    border-left: 0.2px solid rgb(192, 139, 23);
-}
-

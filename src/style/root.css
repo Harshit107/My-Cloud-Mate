@@ -26,4 +26,7 @@
   --border-white : #f0f0f0ea;
   --border-white-light : #b3b3b32e;
 
+  --delete: rgb(235, 43, 43);
+  --delete-light: rgb(240, 74, 74);
+
 }

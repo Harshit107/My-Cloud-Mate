@@ -16,7 +16,6 @@
     font-size: 17px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400 ;
-
 }
 
 .button:hover, 
@@ -25,8 +24,14 @@
     background-color: var(--text-1);
     box-shadow: none;
     transform: translateY(4px) translateX(-1px);    
-
 }
+.button:disabled {
+    background-color: gray;
+    box-shadow: -1px 3px  gray;
+    color: black;
+}
+
+
 
 .button-container {
     display: flex;
@@ -38,16 +43,17 @@
     padding-left: 10px;
     padding-top: 5px;
     
-    white-space: nowrap;
-    /* Prevents text from wrapping to the next line */
-    overflow: hidden;
-    /* Hides any overflow beyond the defined width */
-    text-overflow: ellipsis;
+    
 }
 .button-span {
     width: fit-content;
     height: fit-content;
     padding-right: 10px;
+    white-space: nowrap;
+    /* Prevents text from wrapping to the next line */
+    overflow: hidden;
+    /* Hides any overflow beyond the defined width */
+    text-overflow: ellipsis;
 }
 
 .button-image {
@@ -55,4 +61,41 @@
     height: 25px;
     margin-left: 10px;
     margin-top: 3px;
+}
+
+/* -------------------------------------------- */
+/* Combo Button classes  */
+/* -------------------------------------------- */
+
+.btnDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: right;
+}
+.btn {
+    max-width: 120px;
+}
+
+.cancelBtn {
+    background-color: rgba(231, 227, 227, 0.863);;
+    box-shadow: -2px 2px white;
+}
+
+button:disabled, button:disabled:hover {
+    background-color: #ccc;
+    box-shadow: -2px 2px #ccc;
+}
+
+
+/* //delet project Css */
+
+.delete {
+    background-color: var(--delete);
+    box-shadow: -2px 2px var(--delete-light);
+}
+
+.delete:hover {
+    background-color: var(--delete);
+    box-shadow: -2px 2px var(--delete-light);
 }

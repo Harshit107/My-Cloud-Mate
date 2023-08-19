@@ -4,8 +4,10 @@ const Modal = (props) => {
 
     return (
        <Backdrop removeBackdrop = {props.removeBackdrop}>
+
             <div className={classes.modal} onClick={(event) => {event.stopPropagation(); }}>
-                <h1>hey</h1>
+                <h2>Create Project</h2>
+                {props.children}
             </div>
        </Backdrop>
     )

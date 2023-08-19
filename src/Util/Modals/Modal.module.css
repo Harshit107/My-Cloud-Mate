@@ -1,6 +1,5 @@
 .modal {
-    width: 400px;
-    height: 400px;
+    width: 600px;
     ;
     background-color: var(--bg-1);
     /* background-color: var(--border-white); */
@@ -9,5 +8,10 @@
     /* box-shadow: 0 0 2px 7px #acabab67; */
     border: 2px solid var(--text-1);
     pointer-events: auto;
+    display: flex;
+    justify-content:center ;
+    flex-direction: column;
+    color: var(--text-1);
+    font-family : sans-serif
     
 }

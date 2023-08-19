@@ -5,12 +5,12 @@ import ProjectMain from './RightSection/ProjectMain';
 import classes from './Projects.module.css'
 import PlusImage from '../images/plus.png';
 import { useState } from 'react';
-import Modal from '../Util/Modals/Modal';
+import CreateProjectModal from '../Util/Modals/CreateProjectModal';
 
 
 const Projects = () => {
 
-   const [isBackdrop, setBackdrop]  = useState(true);
+   const [isBackdrop, setBackdrop]  = useState(false);
 
    function handleCreateOnClick() {
         setBackdrop(true)
@@ -22,13 +22,13 @@ const Projects = () => {
 
    const buttonAction = {
         action : {
-            onClick : handleCreateOnClick
+            onClick : handleCreateOnClick,
         }
    }
 
     return (
         <div className={classes['main']}>
-            {isBackdrop && <Modal removeBackdrop = {removeBackdrop}/>}
+            {isBackdrop && <CreateProjectModal removeBackdrop = {removeBackdrop}/>}
             <div className={classes['side-section']}>
                 <ButtonWithAddIcon image ={PlusImage} buttonName="Create Project" action = {buttonAction.action}/>
                 <ProjectList/>

@@ -37,6 +37,28 @@ const fileReducer = (state, action) => {
         }
     }
 
+    if(action.type === 'ADD_PROJECT') {
+
+        const newProjects = state.projects.concat(action.project);
+        return  {
+            activeProjectId: state.activeProjectId,
+            files: state.files,
+            availableFiles: state.availableFiles,
+            projects : newProjects
+        }
+    }
+
+    if(action.type === 'REMOVE_PROJECT') {
+        const newProjects = state.projects.filter(project => project.id !== action.id);
+        const activeProjectId = 0;
+        return  {
+            activeProjectId: activeProjectId,
+            files: state.files,
+            availableFiles: state.availableFiles,
+            projects : newProjects
+        }
+    }
+
     return defaultState;
 
 
@@ -60,13 +82,44 @@ const FileProvider = (props) => {
             id: id,
         })
     }
+    
+
+    const addNewFileHandler = (file) => {
+        dispatchfiles({
+            type: 'ADD_FILE',
+            file: file,
+        })
+    }
+
+    const addNewProjectHandler = (project) => {
+        dispatchfiles({
+            type: 'ADD_PROJECT',
+            project: project,
+        })
+    }
+
+    
+
+    const removeProjectHandler = (id) => {
+        dispatchfiles({
+            type: 'REMOVE_PROJECT',
+            id: id,
+        })
+    }
+
+
+
     const filesState = {
         activeProjectId: filesStore.activeProjectId,
         files: DUMMY_FILES,
         availableFiles: filesStore.availableFiles,
-        projects: PROJECT,
+        projects: filesStore.projects,
         searchFiles: searchFileHandler,
-        selectedFilesFun: selectFilesHandler
+        selectedFilesFun: selectFilesHandler,
+        addNewProject : addNewProjectHandler,
+        addNewFile : addNewFileHandler,
+        removeProject : removeProjectHandler
+
     }
 
     useEffect(() => {

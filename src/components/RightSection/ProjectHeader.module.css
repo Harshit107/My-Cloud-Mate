@@ -1,4 +1,4 @@
-.button-upload-file {
+.button {
     width: fit-content;
 }
 
@@ -20,7 +20,7 @@
 .project-header-action-delete {
     background-color: rgb(199, 28, 28);
     box-shadow: -2px 2px 2px #807e7e;
-    padding-right: 10px;
+    padding-right:  0px;
     border: none;
 }
 

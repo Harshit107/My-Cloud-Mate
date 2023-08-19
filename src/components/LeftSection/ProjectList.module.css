@@ -54,6 +54,7 @@ p {
   background-size: 200% 200%;
   animation: gradientAnimation 3s infinite;
   font-weight: 400;
+  color: black;
 
 }
 

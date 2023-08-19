@@ -8,6 +8,9 @@ const availableFilesContext = createContext({
     availableFiles:[],
     searchFiles : () => {},
     selectedFilesFun : () => {},
+    addNewProject : () => {},
+    addNewFile : () => {},
+    removeProject : () => {},
 })
 
 export default availableFilesContext;

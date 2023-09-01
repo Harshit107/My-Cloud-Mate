@@ -8,6 +8,8 @@ import FileContext from '../../store/file-context';
 import React, { useContext, useRef, useState } from "react";
 import DeleteProjectModal from "../../Util/Modals/DeleteProjectModal";
 import FileDetailModal from "../../Util/Modals/FileDetailsModal";
+import ProjectFilesSort from "./ProjectFilesSort";
+import ProjectFilesFilter from "./ProjectFilesFilter";
 
 
 
@@ -18,27 +20,39 @@ const ProjectHeader = () => {
     const [isDeleteClicked, setDeleteClicked] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null);
 
+    const handleSortButtonclicked = () => {
+        const filterMainDiv = document.getElementById('project-file-filter').classList;
+        if (filterMainDiv.contains('display-content'))
+            filterMainDiv.toggle('display-content')
+
+        document.getElementById('project-file-sort').classList.toggle('display-content');
+
+    }
+
+    const handleFilterButtonclicked = () => {
+        const sortingMainDiv = document.getElementById('project-file-sort').classList;
+        if (sortingMainDiv.contains('display-content'))
+            sortingMainDiv.toggle('display-content')
+
+        document.getElementById('project-file-filter').classList.toggle('display-content');
+
+    }
 
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        console.log(file);
         setSelectedFile(file);
         event.target.value = null;
-        setTimeout( () => {
-            setSelectedFile(null);
-        },20000)
-
-      };
-      const handleButtonClick = () => {
+    };
+    const handleButtonClick = () => {
         // Trigger the file input click event
         if (fileInputRef.current) {
-          fileInputRef.current.click();
+            fileInputRef.current.click();
         }
-      };
-    
-      const fileInputRef = useRef();
-    
+    };
+
+    const fileInputRef = useRef();
+
 
     const handleDeleteProject = () => {
         setDeleteClicked(true)
@@ -56,25 +70,44 @@ const ProjectHeader = () => {
                 />
 
                 <ButtonWithAddIcon
-                    action ={{onClick : handleButtonClick}}
+                    action={{ onClick: handleButtonClick }}
                     className={classes.button}
                     image={uploadIcon} buttonName="Upload File" />
 
-                {isFilesAvailable && <ButtonWithAddIcon
-                    className={classes.button}
-                    image={sortIcon}
-                    buttonName="Sort" />
+                {isFilesAvailable && <>
+                    <div className={classes.sort}>
+                        <ButtonWithAddIcon
+                            className={classes.button}
+                            image={sortIcon}
+                            action={{
+                                onClick: handleSortButtonclicked
+                            }}
+                            buttonName="Sort" />
+                        <div className={classes.enable} id="project-file-sort">
+                            <ProjectFilesSort className={classes.button} />
+                        </div>
+                    </div>
+
+                    <div className={classes.filter}>
+                        <ButtonWithAddIcon
+                            className={classes.button}
+                            image={filterIcon}
+                            action={{
+                                onClick: handleFilterButtonclicked
+                            }}
+                            buttonName="Filter" />
+                        <div className={classes.enable} id="project-file-filter">
+                            <ProjectFilesFilter className={classes.button} />
+                        </div>
+                    </div>
+                </>
                 }
 
-                {isFilesAvailable &&
-                    <ButtonWithAddIcon className={classes.button}
-                        image={filterIcon}
-                        buttonName="Filter" />
-                }
+
             </div>
             <div>
                 {isDeleteClicked && <DeleteProjectModal removeBackdrop={() => setDeleteClicked(false)} id={selectedProject} />}
-                {selectedFile && <FileDetailModal removeBackdrop={() => setSelectedFile(null)} id={selectedProject} selectedFile = {selectedFile}/>}
+                {selectedFile && <FileDetailModal removeBackdrop={() => setSelectedFile(null)} id={selectedProject} selectedFile={selectedFile} />}
                 <ButtonWithAddIcon
                     action={{ onClick: handleDeleteProject }}
                     className={`${classes.button} ${classes['project-header-action-delete']}`}

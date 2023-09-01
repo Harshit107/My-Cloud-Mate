@@ -1,3 +1,4 @@
+
 .button {
     width: fit-content;
 }
@@ -27,4 +28,19 @@
 .project-header-action-delete:hover,
 .project-header-action-delete:active {
     background-color: rgb(150, 21, 21);
+}
+
+
+.enable {
+    display: block;
+    width: fit-content;
+    height: 0px ;
+    transition: 0.3s ease;
+    display: none;
+
+}
+
+
+.filter {
+    display: block;
 }

@@ -3,11 +3,13 @@ import FileContext from './file-context';
 import { useEffect, useReducer } from 'react';
 import DUMMY_FILES, { PROJECT } from '../components/DummyFiles'
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../Helper/LocalStorage';
+// import filterFiles, { filterAvailable, sortedData } from '../Helper/filter';
 
 
 
 const defaultState = getDataFromLocalStorage() || {
         files: [],
+        isAuthenticated : false,
         activeProjectId: 0,
         projects: PROJECT,
         availableFiles: DUMMY_FILES
@@ -31,7 +33,8 @@ const fileReducer = (state, action) => {
             activeProjectId: state.activeProjectId,
             files: state.files,
             availableFiles: filterFiles,
-            projects: state.projects
+            projects: state.projects,
+            isAuthenticated : state.isAuthenticated
         }
     }
 
@@ -41,7 +44,9 @@ const fileReducer = (state, action) => {
             activeProjectId: action.id,
             files: state.files,
             availableFiles: filterFiles,
-            projects: state.projects
+            projects: state.projects,
+            isAuthenticated : state.isAuthenticated
+
         }
     }
 
@@ -52,7 +57,9 @@ const fileReducer = (state, action) => {
             activeProjectId: state.activeProjectId,
             files: state.files,
             availableFiles: state.availableFiles,
-            projects : newProjects
+            projects : newProjects,
+            isAuthenticated : state.isAuthenticated
+
         }
     }
     
@@ -63,7 +70,9 @@ const fileReducer = (state, action) => {
             activeProjectId: activeProjectId,
             files: state.files,
             availableFiles: state.availableFiles,
-            projects : newProjects
+            projects : newProjects,
+            isAuthenticated : state.isAuthenticated
+
         }
     }
 
@@ -75,7 +84,21 @@ const fileReducer = (state, action) => {
             activeProjectId: state.activeProjectId,
             files: allFiles,
             availableFiles: availableFiles,
-            projects : state.projects
+            projects : state.projects,
+            isAuthenticated : state.isAuthenticated
+
+        }
+    }
+
+    if(action.type === 'UPDATE_AVAILABLE_FILES') {
+
+        return  {
+            activeProjectId: state.activeProjectId,
+            files: state.files,
+            availableFiles: action.files,
+            projects : state.projects,
+            isAuthenticated : state.isAuthenticated
+
         }
     }
 
@@ -89,6 +112,9 @@ const fileReducer = (state, action) => {
 const FileProvider = (props) => {
 
     const [filesStore, dispatchfiles] = useReducer(fileReducer, defaultState);
+    // console.log(sortedData(filesStore.files, {field : 'name', sortBy : 'last'}));
+    // const availableFileType =  filterAvailable(filesStore.files);
+    // console.log(filterFiles(filesStore.files,['PDF']));
 
     setDataToLocalStorage(filesStore)
 
@@ -130,6 +156,26 @@ const FileProvider = (props) => {
             id: id,
         })
     }
+    
+
+    const updateAvailableFilesHandler = (files) => {
+        if(!files)
+            return selectProjectHandler(filesStore.activeProjectId)
+        
+        dispatchfiles({
+            type: 'UPDATE_AVAILABLE_FILES',
+            files
+        })
+    }
+
+
+    const updateIsAuthenticatedHandler = (isUser = false) => {
+        
+        dispatchfiles({
+            type: 'AUTH',
+            isUser
+        })
+    }
 
 
 
@@ -138,11 +184,14 @@ const FileProvider = (props) => {
         files: filesStore.files,
         availableFiles: filesStore.availableFiles,
         projects: filesStore.projects,
+        isAuthenticated : filesStore.isAuthenticated,
         searchFiles: searchFileHandler,
         selectedFilesFun: selectProjectHandler,
         addNewProject : addNewProjectHandler,
         addNewFile : addNewFileHandler,
-        removeProject : removeProjectHandler
+        removeProject : removeProjectHandler,
+        updateAvailableFiles : updateAvailableFilesHandler,
+        updateIsAuthenticated : updateIsAuthenticatedHandler, 
 
     }
     useEffect(() => {

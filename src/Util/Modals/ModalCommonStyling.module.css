@@ -37,6 +37,14 @@
     color: rgb(235, 43, 43)
 }
 
+.success{
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: rgb(10, 182, 82)
+
+}
+
 
 /* Create Project Classes for Button */
 
@@ -74,3 +82,28 @@ button:disabled, button:disabled:hover {
 }
 
 /* Create Project Classes for Button */
+
+
+
+/* Progress bar  ~ for Upload used in ProjectDetailModal */
+.progress-bar {
+    width: 0;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 20px 0 0 20px;
+    background: linear-gradient(45deg, #4caf50, #1abc9c);
+    transition: width 0.5s;
+  }
+
+  .progress-container {
+    width: 90%;
+    margin: 5px auto;
+    
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }

@@ -14,9 +14,18 @@
   --bg-2-trans: #3437389f;
   --bg-3-trans: #1b1e1f9f;
   
+  /* --text-0: #3a8572;
   --text-1: #499381;
   --text-2: #59bea6;
-  --text-3: #7dc9b7;
+  --text-3: #7dc9b7; */
+  
+  --text-0: #03c9b8;
+  --text-1: #02c5b5;
+  --text-2: #04d3c2;
+  --text-3: #04e9d6;
+
+  --text-8: #0ad3c2;
+  --text-9: #0df5e3;
   --text-3-trans: #7dc9b75e;
 
   --heading-0 : #b6a83f;
@@ -30,4 +39,9 @@
   --delete: rgb(235, 43, 43);
   --delete-light: rgb(240, 74, 74);
 
+}
+
+
+.display-content {
+  display: contents !important;
 }

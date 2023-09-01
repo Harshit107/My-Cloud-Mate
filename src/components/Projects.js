@@ -30,7 +30,7 @@ const Projects = () => {
         <div className={classes['main']}>
             {isBackdrop && <CreateProjectModal removeBackdrop = {removeBackdrop}/>}
             <div className={classes['side-section']}>
-                <ButtonWithAddIcon image ={PlusImage} buttonName="Create Project" action = {buttonAction.action}/>
+                <ButtonWithAddIcon image ={PlusImage} buttonName="New Project" action = {buttonAction.action}/>
                 <ProjectList/>
             </div>
             <div className={classes['main-section']}>

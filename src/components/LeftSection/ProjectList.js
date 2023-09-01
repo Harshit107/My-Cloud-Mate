@@ -4,7 +4,6 @@ import FileContext from '../../store/file-context'
 
 const ProjectList = (props) => {
     const ctx = useContext(FileContext);
-    console.log(ctx);
     const projects = ctx.projects
     const activeProjectId = ctx.activeProjectId;
     function handleProjectClicked(id) {
@@ -13,18 +12,18 @@ const ProjectList = (props) => {
 
 
     return (
-        <div className = {classes['project-list']}>            
-            
+        <div className={classes['project-list']}>
+
             {projects.length === 1 && <p className={classes['no-project-found']}>
-             We've set up a default project for you to explore the features and get started. To keep your projects organized and separate, Press Create Project</p>                
+                We've set up a default project for you to explore the features and get started. To keep your projects organized and separate, Press New Project</p>
             }
             {projects &&
                 <ul className={classes['ul']}>
-                    {projects.map(project => (                        
+                    {projects.map(project => (
                         <li key={project.id}
-                         className={project.id === activeProjectId ? classes['active'] : ''}
-                         onClick={handleProjectClicked.bind(null,project.id)}
-                         >{project.name}</li>
+                            className={project.id === activeProjectId ? classes['active'] : ''}
+                            onClick={handleProjectClicked.bind(null, project.id)}
+                        >{project.name}</li>
                     ))}
                 </ul>
             }

@@ -1,0 +1,15 @@
+.project-sort-list {
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-weight: 200;
+    position: relative;
+    z-index: 2;
+    background-color: var(--bg-1);
+    padding: 10px;
+  }
+  
+  .project-sort-list .ul li{
+    font-size: 14px ;
+    margin-top: 5px ;
+  }

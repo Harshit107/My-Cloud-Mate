@@ -24,6 +24,12 @@
   cursor: pointer;
 }
 
+.userContentContainer {
+  position: absolute;
+  right: 0;
+}
+
+
 @media (max-width: 600px) {
   /* Adjust the breakpoint and styles for smaller screens */
   .logo-img {

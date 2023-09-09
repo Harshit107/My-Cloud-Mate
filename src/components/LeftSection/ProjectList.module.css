@@ -59,7 +59,7 @@ p {
 }
 
 /* -----------------------------------
----- Reusable code for ProjectfileSort 
+---- Reusable code for ProjectfileSort and filter 
 ------------------------------------- */
 .project-sort-list {
   padding: 5px;
@@ -70,6 +70,27 @@ p {
   z-index: 2;
   background-color: var(--bg-1);
   padding: 10px;
+}
+
+.project-sort-list .ul li{
+  font-size: 14px ;
+  margin-top: 5px ;
+}
+
+
+
+/* -----------------------------------
+---- Reusable code for ProfileSectionList
+------------------------------------- */
+.profile-section-list {
+  border-radius: 10px;
+  margin-right: 20px;
+  font-weight: 200;
+  position: relative;
+  z-index: 2;
+  background-color: var(--bg-1);
+  border: .5px solid rgba(243, 243, 243, 0.274);
+  padding: 10px 20px;
 }
 
 .project-sort-list .ul li{

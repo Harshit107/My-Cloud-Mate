@@ -7,6 +7,7 @@ const availableFilesContext = createContext({
     activeProjectId : 0,
     projects:[],
     availableFiles:[],
+    token : "",
     searchFiles : () => {},
     selectedFilesFun : () => {},
     addNewProject : () => {},

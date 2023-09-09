@@ -34,6 +34,7 @@ const fileReducer = (state, action) => {
             files: state.files,
             availableFiles: filterFiles,
             projects: state.projects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
         }
     }
@@ -45,6 +46,7 @@ const fileReducer = (state, action) => {
             files: state.files,
             availableFiles: filterFiles,
             projects: state.projects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
 
         }
@@ -58,6 +60,7 @@ const fileReducer = (state, action) => {
             files: state.files,
             availableFiles: state.availableFiles,
             projects : newProjects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
 
         }
@@ -71,6 +74,7 @@ const fileReducer = (state, action) => {
             files: state.files,
             availableFiles: state.availableFiles,
             projects : newProjects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
 
         }
@@ -85,6 +89,7 @@ const fileReducer = (state, action) => {
             files: allFiles,
             availableFiles: availableFiles,
             projects : state.projects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
 
         }
@@ -97,6 +102,7 @@ const fileReducer = (state, action) => {
             files: state.files,
             availableFiles: action.files,
             projects : state.projects,
+            token : state.token,
             isAuthenticated : state.isAuthenticated
 
         }
@@ -115,7 +121,6 @@ const FileProvider = (props) => {
     // console.log(sortedData(filesStore.files, {field : 'name', sortBy : 'last'}));
     // const availableFileType =  filterAvailable(filesStore.files);
     // console.log(filterFiles(filesStore.files,['PDF']));
-
     setDataToLocalStorage(filesStore)
 
     const searchFileHandler = (text) => {

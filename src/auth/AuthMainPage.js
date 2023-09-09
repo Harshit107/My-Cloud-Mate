@@ -20,7 +20,7 @@ const AuthMainPage = () => {
             loginContainer.classList.toggle(classes['animationSlideDown'])
             setTimeout(() => {
                 signupContainer.style.zIndex = 1;
-            }, 750)
+            }, 500)
            
         }
 
@@ -28,14 +28,14 @@ const AuthMainPage = () => {
             signupContainer.classList.toggle(classes['animationSlideDown'])
             setTimeout(() => {
                 signupContainer.style.zIndex = 0;
-            }, 750)
+            }, 500)
 
         }
 
         setTimeout(() => {
             signupContainer.classList.remove(classes['animationSlideDown'])
             loginContainer.classList.remove(classes['animationSlideDown'])
-        }, 1500)
+        }, 1000)
 
 
 

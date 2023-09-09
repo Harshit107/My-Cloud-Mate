@@ -14,12 +14,15 @@
     height: 100%;
     width: 80%;
     float: right;
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .img{
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     text-align: center;
     margin-top: 20px;
     mix-blend-mode: var(--bg-1);
@@ -27,6 +30,10 @@
 .p {
     color: var(--text-2);
     margin-bottom: 10px;
+}
+.createAccount{
+    color: var(--text-2);
+    font-size: 18px;
 }
 
 .createP {
@@ -37,6 +44,18 @@
     
 
 } 
+.error{
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    text-align: left;
+    width: 100%;
+}
+.invalidPassword{
+    color: rgb(237, 45, 45);
+    font-size: 17px;
+    text-align: center;
+}
 .span {
      margin-left: 10px;
      color: var(--text-2);;

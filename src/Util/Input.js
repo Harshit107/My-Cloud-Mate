@@ -9,6 +9,7 @@ const Input = (props) => {
         <input {...props.input}  
         />
         <span> {props.input.name}</span>
+        {props.children}
      </div>
    )
 }

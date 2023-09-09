@@ -66,7 +66,7 @@
 
 .animationSlideDown {
     cursor: pointer;
-    animation: go-to-back 1.5s ease-in-out; /* Use the animation name here */
+    animation: go-to-back 1s ease-in-out; /* Use the animation name here */
    
 }
 

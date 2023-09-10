@@ -4,10 +4,11 @@ import userImage from '../../images/user.png';
 import classes from './MainHeader.module.css'
 import Search from './Search';
 import ProfileSectionList from './ProfileSectionList'
+import { useState } from 'react';
 
 const MainHeader = (props) => {
 
-
+  const [displayProfileSection, setDisplayProfileSection] = useState(false);
 
   return (
     <div className={classes["header-container"]}>
@@ -19,17 +20,18 @@ const MainHeader = (props) => {
         />
       </Circle>
       <Search />
-      <div className={classes.user}>
+      <div className={classes.user} >
         <Circle>
           <img
             src={userImage}
             alt="Website logo"
             className={classes["user-img"]}
+            onClick={ () => setDisplayProfileSection(!displayProfileSection)}
           />
         </Circle>
-        <div className={classes.userContentContainer}>
+        {displayProfileSection && <div className={classes.userContentContainer} >
             <ProfileSectionList />
-        </div>
+        </div>}
       </div>
 
     </div>

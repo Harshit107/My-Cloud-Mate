@@ -98,6 +98,17 @@ p {
   margin-top: 5px ;
 }
 
+.logoutList{
+  position: absolute;
+  right: 80%;
+  top: 70%
+}
+.logoutList li:hover{
+  background-color: var(--text-1);
+  font-weight: 300;
+  scale: 1.0;
+}
+
 
 
 

@@ -64,7 +64,7 @@ const SignupPage = (props) => {
         if(serverData) {
             setTokenToLocalStorage(serverData.token)
             toast.success("Account created successfully")
-            navigate('/dashboard')
+            navigate('/')
         }
 
     },[serverData, navigate])

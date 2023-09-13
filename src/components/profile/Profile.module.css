@@ -1,0 +1,13 @@
+/* Profile.module.css */
+.container {
+    width: 100%;
+    height: max-content;
+    overflow-y: scroll !important;
+
+    
+  }
+  .content{
+    height: 100%;
+
+  }
+  

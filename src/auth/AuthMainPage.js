@@ -5,12 +5,7 @@ import SignupPage from './SignupPage';
 
 const AuthMainPage = () => {
 
-    // const navigate = useNavigate();
-    // const routeChange = () => {
-    //     let path = `/dashboard`;
-    //     navigate(path);
-    // }
-
+    
 
     const handleAddClickAnimation = (container) => {
         const loginContainer = document.getElementById('loginContainer');

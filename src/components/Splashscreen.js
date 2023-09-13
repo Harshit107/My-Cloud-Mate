@@ -10,7 +10,7 @@ const SplashScreen = () => {
     const navigate = useNavigate();
 
     const routeChange = useCallback(() => {
-        let path = `/dashboard`;
+        let path = `/auth`;
         navigate(path);
     },[navigate])   
 

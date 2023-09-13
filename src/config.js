@@ -8,6 +8,9 @@ export const LOGIN_API = BASE_API_URL + "/users/login";
 export const LOGOUT_API = BASE_API_URL + "/users/logout";
 export const LOGOUT_ALL_API = BASE_API_URL + "/users/logout/all";
 export const LOGOUT_ALL_EXCEPT_API = BASE_API_URL + "/users/logout/all/current";
+export const LOGOUT_ALL_FROM = BASE_API_URL + "/users/logout/device";
 export const IS_USER_LOGEDIN_API = BASE_API_URL + "/users/check/login";
 export const PROFILE_API = BASE_API_URL + "/users/profile";
+export const PROFILE_TOKEN_API = BASE_API_URL + "/users/profile/token";
+
 export const SEND_VERIFICATION_API = BASE_API_URL + "/users/vaerification/email";

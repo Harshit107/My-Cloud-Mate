@@ -58,7 +58,7 @@ const LoginPage = (props) => {
         if(serverData) {
             setTokenToLocalStorage(serverData.token)
             toast.success(`Welcome back, ${serverData.user.name}`)
-            navigate('/dashboard')
+            navigate('/')
         }
     }, [serverData, navigate])
 

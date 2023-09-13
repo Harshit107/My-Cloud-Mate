@@ -53,7 +53,7 @@ const ProfileSectionList = () => {
         <>
             <div className={classes['profile-section-list']}>
                 <ul className={classes['ul']}>
-                    <li key={"profile"}>
+                    <li key={"profile"} onClick={() => navigate('/profile')}>
                         Profile
                     </li>
 

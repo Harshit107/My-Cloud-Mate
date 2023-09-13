@@ -1,8 +1,9 @@
 .circle {
     background-color: #ffffff; /* Change to desired color */
     border-radius: 50%;
-    border: 1px solid var(--text-1); /* Makes the element circular */
+    border: 5px solid var(--text-1); /* Makes the element circular */
     margin: 10px;
     width: fit-content;
     height: fit-content;
+    padding: 2px;
   }

@@ -31,6 +31,7 @@ export default function useServer() {
             }
             setIsLoading(false);
             setData(data);
+            return data;
 
         } catch (error) {
             console.log(error);

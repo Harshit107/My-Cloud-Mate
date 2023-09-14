@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import classes from './ProjectList.module.css'
 import FileContext from '../../store/file-context'
 
-const ProjectList = (props) => {
+const ProjectList = () => {
     const ctx = useContext(FileContext);
     const projects = ctx.projects
     const activeProjectId = ctx.activeProjectId;
@@ -20,10 +20,10 @@ const ProjectList = (props) => {
             {projects &&
                 <ul className={classes['ul']}>
                     {projects.map(project => (
-                        <li key={project.id}
-                            className={project.id === activeProjectId ? classes['active'] : ''}
-                            onClick={handleProjectClicked.bind(null, project.id)}
-                        >{project.name}</li>
+                        <li key={project._id}
+                            className={project._id === activeProjectId ? classes['active'] : ''}
+                            onClick={handleProjectClicked.bind(null, project._id)}
+                        >{project.projectName}</li>
                     ))}
                 </ul>
             }

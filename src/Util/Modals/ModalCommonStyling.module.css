@@ -36,6 +36,12 @@
     text-align: left;
     color: rgb(235, 43, 43)
 }
+.info{
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: left;
+    color: rgb(74, 229, 250)
+}
 
 .success{
     margin-bottom: 10px;

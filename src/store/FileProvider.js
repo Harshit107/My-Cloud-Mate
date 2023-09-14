@@ -15,13 +15,6 @@ const defaultState = getDataFromLocalStorage() || {
         availableFiles: DUMMY_FILES
     }
 
-// const defaultState = {
-//     files: [],
-//     activeProjectId: 0,
-//     projects: PROJECT,
-//     availableFiles: DUMMY_FILES
-// }
-
 const fileReducer = (state, action) => {
 
     if (action.type === 'search') {
@@ -108,6 +101,13 @@ const fileReducer = (state, action) => {
         }
     }
 
+    if(action.type === 'UPDATE_ALL') {
+
+        return  {
+            ...action.data
+        }
+    }
+
 
     return defaultState;
 
@@ -118,9 +118,7 @@ const fileReducer = (state, action) => {
 const FileProvider = (props) => {
 
     const [filesStore, dispatchfiles] = useReducer(fileReducer, defaultState);
-    // console.log(sortedData(filesStore.files, {field : 'name', sortBy : 'last'}));
-    // const availableFileType =  filterAvailable(filesStore.files);
-    // console.log(filterFiles(filesStore.files,['PDF']));
+    
     setDataToLocalStorage(filesStore)
 
     const searchFileHandler = (text) => {
@@ -182,6 +180,14 @@ const FileProvider = (props) => {
         })
     }
 
+    const updateAllData = (data = getDataFromLocalStorage()) => {
+        
+        dispatchfiles({
+            type: 'UPDATE_ALL',
+            data
+        })
+    }
+
 
 
     const filesState =   {
@@ -197,9 +203,11 @@ const FileProvider = (props) => {
         removeProject : removeProjectHandler,
         updateAvailableFiles : updateAvailableFilesHandler,
         updateIsAuthenticated : updateIsAuthenticatedHandler, 
+        updateAllData : updateAllData, 
 
     }
     useEffect(() => {
+        
         selectProjectHandler(filesState.activeProjectId);
     }, [filesState.activeProjectId])
 

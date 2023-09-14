@@ -14,6 +14,7 @@ const availableFilesContext = createContext({
     addNewFile : () => {},
     removeProject : () => {},
     updateAvailableFiles : () => {},
+    updateAllData : () => {},
     updateIsAuthenticated : () => {},
 })
 

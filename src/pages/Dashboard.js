@@ -1,42 +1,43 @@
-import { useNavigate } from "react-router-dom";
 import Homepage from "../Homepage";
-import useAuth from "../db/useServer";
-import { IS_USER_LOGEDIN_API } from '../config';
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import LoadingGIF from "../images/loading-main.svg";
-import classes from './Dashboard.module.css';
-
-const LoadingPage = () => {
-  return (
-    <div className={classes.loadingContainer}>
-      <img className={classes.loadingGIF} src={LoadingGIF} alt="Loading..." />
-      <p className={classes.p}>Loading...</p>
-    </div>
-  );
-};
+import { GET_PROJECT_DATA } from '../config';
+import { useCallback, useContext, useEffect } from "react";
+import TopLoading from "../Util/TopLoading";
+import useServer from "../db/useServer";
+import { handleProjectData } from "../Helper/Common";
+import fileContext from '../store/file-context'
 
 const Dashboard = () => {
-  const { handleAPICall, error, isLoading } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    handleAPICall(IS_USER_LOGEDIN_API)
+  const { handleAPICall: handleDataCall, error: projectError, data: projectData, isLoading: projectLoading } = useServer();
+  const ctx = useContext(fileContext)
+
+  const updateState = useCallback((data) => {
+    ctx.updateAllData(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
+
+  // -----------------  Handling project data ----------------
 
   useEffect(() => {
-    if (error) {
-      toast.error(error)
-      navigate('/auth')
-    }
-  }, [error, navigate])
+    handleDataCall(GET_PROJECT_DATA)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  // Once authentication status has been checked, render the homepage.
+  useEffect(() => {
+    if (projectData) {
+      const data = handleProjectData(projectData.message)
+      updateState(data);
+    }
+    else if (projectError) {
+
+    }
+  }, [projectData, projectError, updateState])
+
   return (
     <>
-      {isLoading && <LoadingPage />}
-      {!isLoading && <Homepage />}
+      {/* {projectLoading && } */}
+      {projectLoading && <TopLoading message='Fetching data,' />}
+      {!projectLoading && <Homepage />}
     </>
   )
 };

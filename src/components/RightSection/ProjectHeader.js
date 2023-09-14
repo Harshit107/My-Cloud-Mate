@@ -10,6 +10,7 @@ import DeleteProjectModal from "../../Util/Modals/DeleteProjectModal";
 import FileDetailModal from "../../Util/Modals/FileDetailsModal";
 import ProjectFilesSort from "./ProjectFilesSort";
 import ProjectFilesFilter from "./ProjectFilesFilter";
+import { toast } from "react-toastify";
 
 
 
@@ -40,6 +41,7 @@ const ProjectHeader = () => {
 
 
     const handleFileChange = (event) => {
+
         const file = event.target.files[0];
         setSelectedFile(file);
         event.target.value = null;

@@ -12,7 +12,7 @@ const CreateProjectModal = (props) => {
 
     const [projectName, setProjectName] = useState('')
     const [isProjectNameEmpty, setProjectNameEmpty] = useState(false)
-    const { data, isLoading, error, handleAPICall} = useServer();
+    const { reset,  isLoading, error, handleAPICall} = useServer();
 
     const ctx = useContext(FileContext);
 
@@ -23,20 +23,21 @@ const CreateProjectModal = (props) => {
     }
 
     useEffect(() => {
-        if(data) {
-            toast.success(data.message);
-        }
-        else if(error) {
-            toast.success(error);
+        if(error) {
+            toast.error("Something went wrong, try again after sometime!",error.message)
+            reset();
         }
 
-    }, [data, error])
+    }, [error, reset])
 
     const addProjectToServer = async () => {
 
          const data = await handleAPICall(UPLOAD_NEW_PROJECT, 'POST', {
             projectName: projectName
         })
+        if(!data){
+            return;
+        }
         ctx.addNewProject({
             _id: data._id,
             projectName: projectName

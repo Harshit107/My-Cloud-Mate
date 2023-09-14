@@ -9,7 +9,7 @@ export default function useServer() {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
 
-    const handleAPICall = async (API, method = "GET", body = undefined) => {
+    const handleAPICall = async (API, method = "GET", body={}) => {
         console.log("Calling API");
         setIsLoading(true);
         try {
@@ -19,7 +19,7 @@ export default function useServer() {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + getTokenFromLocalStorage()
                 },
-                body : JSON.stringify(body),
+                body : method === 'GET' ? undefined : JSON.stringify(body),
             });
             const data = await response.json();
             if (!response.ok) {

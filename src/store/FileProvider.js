@@ -3,6 +3,7 @@ import FileContext from './file-context';
 import { useEffect, useReducer } from 'react';
 import DUMMY_FILES, { PROJECT } from '../components/DummyFiles'
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../Helper/LocalStorage';
+import { getDefaultProjectId } from '../Helper/Common';
 // import filterFiles, { filterAvailable, sortedData } from '../Helper/filter';
 
 
@@ -60,8 +61,8 @@ const fileReducer = (state, action) => {
     }
     
     if(action.type === 'REMOVE_PROJECT') {
-        const newProjects = state.projects.filter(project => project.id !== action.id);
-        const activeProjectId = 0;
+        const newProjects = state.projects.filter(project => project._id !== action.id);
+        const activeProjectId = getDefaultProjectId(state);
         return  {
             activeProjectId: activeProjectId,
             files: state.files,

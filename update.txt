@@ -1,2 +1,7 @@
 * 11-09
 ** Logout System completed
+
+15-09
+Handle auto sort
+File upload to server
+handle error

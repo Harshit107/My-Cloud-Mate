@@ -4,6 +4,7 @@ import { useEffect, useReducer } from 'react';
 import DUMMY_FILES, { PROJECT } from '../components/DummyFiles'
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../Helper/LocalStorage';
 import { getDefaultProjectId } from '../Helper/Common';
+import { sortedData } from '../Helper/filter';
 // import filterFiles, { filterAvailable, sortedData } from '../Helper/filter';
 
 
@@ -103,9 +104,10 @@ const fileReducer = (state, action) => {
     }
 
     if(action.type === 'UPDATE_ALL') {
-
+        const sortedAvailableFiles = sortedData(action.data.files, { sortBy : "first", field : 'name'})
         return  {
-            ...action.data
+            ...action.data,
+            files : sortedAvailableFiles
         }
     }
 

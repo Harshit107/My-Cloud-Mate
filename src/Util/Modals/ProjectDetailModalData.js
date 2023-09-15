@@ -1,10 +1,12 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
 import FileContext from '../../store/file-context';
 import useFileUploader from '../../db/useFileUploader';
 import { currentTimestamp } from '../../Helper/Moment';
 import Button from '../Button';
 import classes from './ModalCommonStyling.module.css';
+import useServer from '../../db/useServer'
+import { UPLOAD_NEW_File } from '../../config';
+import { toast } from 'react-toastify';
 
 const fileSize = (size) => {
     const fileSizeInKb = size > 1000000 ? (size / (1024 * 1024)).toFixed(2) + 'Mb' : (size / 1024).toFixed(2) + 'Kb';
@@ -21,37 +23,53 @@ const ProjectDetailModelData = (props) => {
         isUploadingCompleted,
         handleUploadFile: uploadMyFile,
         uploadProgress,
+        downloadURL,
     } = useFileUploader();
+
+    const { error, handleAPICall } = useServer();
 
     function handleUploadFile(file) {
         isFileSetToDatabase = false;
         uploadMyFile(file);
     }
 
-    const addFileDetailToDashboard = useCallback(() => {
+    useEffect(() => {
+        if (error)
+            toast.error(error.message)
+    },[error])
+
+    const addFileDetailToDashboard = useCallback(async () => {
         const fileDetail = {
-            id: uuid(),
             name: props.selectedFile.name,
             size: fileSize(props.selectedFile.size),
-            created: currentTimestamp,
-            modified: currentTimestamp,
+            createdAt: currentTimestamp,
+            updatedAt: currentTimestamp,
             type: props.selectedFile.name.substring(props.selectedFile.name.lastIndexOf('.') + 1),
             projectId: ctx.activeProjectId,
+            location : "Not set yet",
+            downloadUrl: downloadURL
         };
+
         if (!isFileSetToDatabase) {
             isFileSetToDatabase = true
+            const result = await handleAPICall(UPLOAD_NEW_File, 'POST', fileDetail);
+            if (!result)
+                return;
             props.removeBackdrop();
-            ctx.addNewFile(fileDetail);
-            
+            ctx.addNewFile({...fileDetail, _id : result._id});
         }
 
-    }, [ctx, props]);
+    }, [ctx, props, handleAPICall, downloadURL]);
 
-    if (isFileUploading && uploadProgress > 5) {
-        const progressBar = document.getElementById('progress')
-        progressBar.style.width = uploadProgress + '%';
-        progressBar.innerHTML = uploadProgress + '%';
-    }
+    useEffect(() => {
+
+        if (uploadProgress > 1 && uploadProgress < 99.9) {
+            const progressBar = document.getElementById('progress')
+            progressBar.style.width = uploadProgress + '%';
+            progressBar.innerHTML = uploadProgress + '%';
+        }
+
+    }, [uploadProgress, isFileUploading])
 
     useEffect(() => {
         if (isUploadingCompleted) {
@@ -70,14 +88,14 @@ const ProjectDetailModelData = (props) => {
                 <span>File Size </span> {fileSize(props.selectedFile.size)}
             </p>
 
-            {isFileUploading && (
+            {(isFileUploading) && (
                 <div className={classes['progress-container']} >
                     <div className={classes['progress-bar']} id="progress" >
                         {uploadProgress}%
                     </div>
                 </div>
             )}
-            {isUploadingCompleted && <p className={classes.success}>File Uploaded Successfully</p>}
+            {isUploadingCompleted && <p className={classes.success}>File Uploaded Successfully, Arranging files for you...</p>}
 
             <div className={classes.btnDiv}>
                 <Button onClick={() => props.removeBackdrop()} className={`${classes.btn} ${classes.cancelBtn}`}>

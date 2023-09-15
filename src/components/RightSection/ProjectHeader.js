@@ -10,7 +10,7 @@ import DeleteProjectModal from "../../Util/Modals/DeleteProjectModal";
 import FileDetailModal from "../../Util/Modals/FileDetailsModal";
 import ProjectFilesSort from "./ProjectFilesSort";
 import ProjectFilesFilter from "./ProjectFilesFilter";
-import { toast } from "react-toastify";
+import TopLoading from "../../Util/TopLoading";
 
 
 
@@ -20,6 +20,8 @@ const ProjectHeader = () => {
     const selectedProject = ctx.activeProjectId;
     const [isDeleteClicked, setDeleteClicked] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isFileOpening, setIsFileOpening] = useState(false);
+    const fileInputRef = useRef();
 
     const handleSortButtonclicked = () => {
         const filterMainDiv = document.getElementById('project-file-filter').classList;
@@ -38,23 +40,33 @@ const ProjectHeader = () => {
         document.getElementById('project-file-filter').classList.toggle('display-content');
 
     }
-
+    function initialize() {
+        document.body.onfocus = checkIt;
+        console.log('initializing');
+    }
+    function checkIt() {
+        document.body.onfocus = null;
+        setIsFileOpening(false)
+    }
 
     const handleFileChange = (event) => {
-
         const file = event.target.files[0];
+        setIsFileOpening(false);
         setSelectedFile(file);
         event.target.value = null;
     };
+
     const handleButtonClick = () => {
         // Trigger the file input click event
         if (fileInputRef.current) {
+            setIsFileOpening(true);
             fileInputRef.current.click();
+
         }
+
     };
 
-    const fileInputRef = useRef();
-
+    
 
     const handleDeleteProject = () => {
         setDeleteClicked(true)
@@ -62,11 +74,13 @@ const ProjectHeader = () => {
 
     return (
         <div className={classes["project-header"]}>
+            {isFileOpening && <TopLoading message="Processing file" />}
             <div className={classes["project-header-action"]}>
 
                 <input
                     type="file"
                     ref={fileInputRef}
+                    onClick={initialize}
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />

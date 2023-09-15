@@ -3,6 +3,7 @@ import PdfIcon from '../../images/pdf-icon.png'
 import JpgIcon from '../../images/jpg-icon.png'
 import PngIcon from '../../images/png-icon.png'
 import DocumentIcon from '../../images/document-icon.png'
+import { convertDateToString } from '../../Helper/Common'
 
 const iconStore = {
     "PDF" : PdfIcon,
@@ -18,8 +19,8 @@ const ProjectFiles = (props) => {
            {props.type === 'none' && <div className={classes['files-icon']}></div>}
            <p className={classes['name']}>{props.name }</p>
            <p className={classes['type']}>{props.type === 'none' ? 'File-type' : props.type}</p>
-           <p>{props.modified}</p>
-           <p>{props.created}</p>
+           <p>{convertDateToString(props.modified)}</p>
+           <p>{convertDateToString(props.created)}</p>
            {/* <p>{formattedDate(props.created)}</p> */}
           
         </div>

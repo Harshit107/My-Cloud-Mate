@@ -18,14 +18,13 @@ export const getDefaultProjectId = function (data) {
     return dp[0]._id;
 }
 
-export const convertDateToString = function (date) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // Months start at 0!
-    let dd = today.getDate();
-  
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-  
-    return dd + '-' + mm + '-' + yyyy;
-  }
+export function convertDateToString(timestamp) {
+        if(!timestamp || timestamp.startsWith('C') || timestamp.startsWith('L')) return timestamp;
+        
+        const date = new Date(timestamp);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(-2);  // Take the last two digits of the year
+    
+        return `${day}-${month}-${year}`;
+    }

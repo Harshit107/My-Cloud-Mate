@@ -16,7 +16,7 @@ const ProjectContent = () => {
             {files.length === 0 && <p className={classes['files-not-found']}>No Files Found</p>}
             {files.length > 0 && files.map(files => <ProjectFiles 
             key={files._id} type={files.type} name={files.name} 
-            created={files.createdAt} modified={files.updatedAt} />)}
+            created={files.createdAt} modified={files.updatedAt} downloadUrl = {files.downloadUrl} />)}
         </div>
     )
 }

@@ -1,1 +1,1 @@
-# MyCloudMate
+# MyCloudMate - A free file hosting service

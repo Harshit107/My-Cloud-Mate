@@ -66,7 +66,7 @@ const ProjectHeader = () => {
 
     };
 
-    
+
 
     const handleDeleteProject = () => {
         setDeleteClicked(true)
@@ -89,35 +89,36 @@ const ProjectHeader = () => {
                     action={{ onClick: handleButtonClick }}
                     className={classes.button}
                     image={uploadIcon} buttonName="Upload File" />
+                
 
-                {isFilesAvailable && <>
-                    <div className={classes.sort}>
-                        <ButtonWithAddIcon
-                            className={classes.button}
-                            image={sortIcon}
-                            action={{
-                                onClick: handleSortButtonclicked
-                            }}
-                            buttonName="Sort" />
-                        <div className={classes.enable} id="project-file-sort">
-                            <ProjectFilesSort className={classes.button} />
+                    {isFilesAvailable && <>
+                        <div className={classes.sort}>
+                            <ButtonWithAddIcon
+                                className={classes.button}
+                                image={sortIcon}
+                                action={{
+                                    onClick: handleSortButtonclicked
+                                }}
+                                buttonName="Sort" />
+                            <div className={classes.enable} id="project-file-sort">
+                                <ProjectFilesSort className={classes.button} />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={classes.filter}>
-                        <ButtonWithAddIcon
-                            className={classes.button}
-                            image={filterIcon}
-                            action={{
-                                onClick: handleFilterButtonclicked
-                            }}
-                            buttonName="Filter" />
-                        <div className={classes.enable} id="project-file-filter">
-                            <ProjectFilesFilter className={classes.button} />
+                        <div className={classes.filter}>
+                            <ButtonWithAddIcon
+                                className={classes.button}
+                                image={filterIcon}
+                                action={{
+                                    onClick: handleFilterButtonclicked
+                                }}
+                                buttonName="Filter" />
+                            <div className={classes.enable} id="project-file-filter">
+                                <ProjectFilesFilter className={classes.button} />
+                            </div>
                         </div>
-                    </div>
-                </>
-                }
+                    </>
+                    }
 
 
             </div>

@@ -1,0 +1,30 @@
+.container{
+    width: 90%;;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    background-color: var(--bg-1);
+    border: 1px solid #ffffff28;
+    padding: 10px 0;
+    border-radius: 5px ;
+
+}
+
+.title {
+    width: 35%;
+    padding: 3px 10px;
+
+}
+
+.value {
+    padding: 3px 10px;
+    text-align: left;
+    white-space: nowrap;       /* Prevents text from wrapping to the next line */
+    overflow: hidden;          /* Hides any overflow beyond the defined width */
+    text-overflow: ellipsis; 
+    width: 65%;
+    color: rgb(202, 200, 200);
+}

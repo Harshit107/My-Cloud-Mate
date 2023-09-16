@@ -13,13 +13,9 @@ const iconStore = {
 
 const ProjectFiles = (props) => {
 
-    function handleFileClick() {
-        if (props.downloadUrl)
-            window.open(props.downloadUrl, '_blank');
-    }
 
     return (
-        <div className={`${classes['project-files']} ${classes[props.type]}`} onClick={handleFileClick}>
+        <div className={`${classes['project-files']} ${classes[props.type]}`} onClick={props.openProjectDetails}>
             {props.type !== 'none' && <img src={iconStore[props.type.toUpperCase()] ?? DocumentIcon} alt='type icon' className={classes['files-icon']} />}
             {props.type === 'none' && <div className={classes['files-icon']}></div>}
             <p className={classes['name']}>{props.name}</p>
@@ -27,7 +23,6 @@ const ProjectFiles = (props) => {
             <p>{convertDateToString(props.modified)}</p>
             <p>{convertDateToString(props.created)}</p>
             {/* <p>{formattedDate(props.created)}</p> */}
-
         </div>
     )
 }

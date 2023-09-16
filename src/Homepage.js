@@ -7,8 +7,8 @@ function Homepage() {
 
   return (
     <div className={classes['homepage']}>
-        <MainHeader />
-        <Projects />
+      <MainHeader />
+      <Projects />
     </div>
   );
 }

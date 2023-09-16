@@ -2,9 +2,11 @@ import Homepage from "../Homepage";
 import { GET_PROJECT_DATA } from '../config';
 import { useCallback, useContext, useEffect } from "react";
 import TopLoading from "../Util/TopLoading";
+import Retry from "../Util/Retry";
 import useServer from "../db/useServer";
 import { handleProjectData } from "../Helper/Common";
 import fileContext from '../store/file-context'
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
 
@@ -29,14 +31,16 @@ const Dashboard = () => {
       updateState(data);
     }
     else if (projectError) {
-
+      toast.error(projectError.error)
     }
+    
   }, [projectData, projectError, updateState])
 
   return (
     <>
       {/* {projectLoading && } */}
       {projectLoading && <TopLoading message='Fetching data,' />}
+      {projectError && <Retry />}
       {!projectLoading && <Homepage />}
     </>
   )

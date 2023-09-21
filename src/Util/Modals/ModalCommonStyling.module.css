@@ -64,6 +64,12 @@
     max-width: 120px;
 }
 
+.sendVerificaionBtn {
+    display: inline;
+    max-width: 220px;
+;
+}
+
 .cancelBtn {
     background-color: rgba(231, 227, 227, 0.863);;
     box-shadow: -2px 2px white;

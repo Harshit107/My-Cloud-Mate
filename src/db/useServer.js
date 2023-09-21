@@ -27,14 +27,18 @@ export default function useServer() {
                     toast.error(data.error)
                     navigate('/home')
                 }
+                if(response.status === 503)
+                    toast.error("Internal Server Error")
+                
                 throw new Error(data.error);
             }
             setIsLoading(false);
-            setData(data);
+            setData({...data, status : response.status});
             return data;
 
         } catch (error) {
             console.log(error);
+            
             setError(error.message);
             setIsLoading(false);
         }

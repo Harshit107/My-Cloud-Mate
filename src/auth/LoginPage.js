@@ -3,18 +3,24 @@ import Input from '../Util/Input'
 import Button from '../Util/Button'
 import loginImage from '../images/login.gif'
 import useInput from '../hooks/useInput'
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import loadingImage from '../images/loading.png'
 import useServer from '../db/useServer';
-import {  LOGIN_API } from '../config'
+import { LOGIN_API } from '../config'
 import { setTokenToLocalStorage } from '../Helper/LocalStorage'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import ResendVerificationModal from '../Util/Modals/ResendVerificationModal'
+import ChangePassword from '../Util/Modals/ChangePassword'
 
 const LoginPage = (props) => {
 
     const [buttonIsVisible, setButtonIsVisible] = useState(true);
+    const [emailVerified, setEmailIsVerified] = useState(true);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+
     const navigate = useNavigate();
+
 
     const {
         isLoading, error: serverError, data: serverData, handleAPICall, reset
@@ -22,7 +28,7 @@ const LoginPage = (props) => {
 
     useEffect(() => {
         setButtonIsVisible(!isLoading)
-    },[isLoading])
+    }, [isLoading])
 
     const {
         data: emailData,
@@ -46,31 +52,38 @@ const LoginPage = (props) => {
         setButtonIsVisible(false)
         e.preventDefault();
         reset();
-        handleAPICall(LOGIN_API,"POST",  {
+        handleAPICall(LOGIN_API, "POST", {
             email: emailData,
-            password : passwordData
+            password: passwordData
             // email: "harshit107.in@gmail.com",
             // password : "123456789"
         });
     };
 
-    useEffect( () => {
-        if(serverData) {
+    useEffect(() => {
+        if (serverData) {
             setTokenToLocalStorage(serverData.token)
             toast.success(`Welcome back, ${serverData.user.name}`)
             navigate('/')
         }
-    }, [serverData, navigate])
+        if (serverError) {
+            if (serverError.toLowerCase().includes('not verified'))
+                setEmailIsVerified(false)
 
+        }
+    }, [serverData, navigate, serverError])
 
+    function handleRemoveBackdrop(){
+        setShowPasswordModal(false);
+    }
 
 
 
     return (
-        <div className={classes.loginContainer} onSubmit={submitFormHandler}>
+        <div className={classes.loginContainer} >
             <img src={loginImage} alt='icon' className={classes.img} />
 
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={submitFormHandler}>
                 <p className={classes.p}>Login with Email and Password</p>
 
                 <Input
@@ -80,8 +93,8 @@ const LoginPage = (props) => {
                         type: 'email', onChange: emailTextChange,
                         onBlur: emailBlue,
                         disabled: !buttonIsVisible,
-                        autoComplete : "email",
-                        
+                        autoComplete: "email",
+
                     }} >
                 </Input>
                 {emailError && <p className={classes.error}>Enter valid email address</p>}
@@ -92,19 +105,22 @@ const LoginPage = (props) => {
                         type: 'password', onChange: passwordTextChange,
                         onBlur: passwordBlue,
                         disabled: !buttonIsVisible,
-                        autoComplete:"password",
-                        
+                        autoComplete: "password",
+
                     }}
                 />
+
+                {!emailVerified && <ResendVerificationModal removeBackdrop={() => setEmailIsVerified(true)} email={emailData} />}
                 {passwordError && <p className={classes.error}>Password must be minimum 8 digit</p>}
 
                 {buttonIsVisible && <Button disabled={formBecomeInvalid} className={classes.visible}>Login</Button>}
 
                 {!buttonIsVisible && <div className={` ${classes['loader-container']} ${classes.visible}`}>
-                    <img src={loadingImage} className={classes.loadingImg}  alt='Loading..'/>
+                    <img src={loadingImage} className={classes.loadingImg} alt='Loading..' />
                 </div>}
 
-                <p className={classes.p}>Forget Password?</p>
+                {showPasswordModal && <ChangePassword removeBackdrop = {() => ''} cancelBackdrop = { handleRemoveBackdrop}/>}
+                <p className={`${classes.p} ${classes.forget}`} onClick={() => setShowPasswordModal(true)}>Forget Password?</p>
                 {serverError && <p className={classes.invalidPassword}>{serverError}</p>}
 
                 <p className={classes.createP}>Don't have a account ?<span className={classes.span} onClick={props.onStartAnimation.bind(null, 'login')}>Signup</span></p>

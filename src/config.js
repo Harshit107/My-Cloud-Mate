@@ -13,14 +13,18 @@ export const IS_USER_LOGEDIN_API = BASE_API_URL + "/users/check/login";
 export const PROFILE_API = BASE_API_URL + "/users/profile";
 export const PROFILE_TOKEN_API = BASE_API_URL + "/users/profile/token";
 export const SEND_VERIFICATION_API = BASE_API_URL + "/users/verification/email";
+export const SEND_OTP = BASE_API_URL + "/users/forget";
+export const OTP_VERIFY_API = BASE_API_URL + "/users/verify/otp";
 
 //project 
 export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_PROJECT = BASE_API_URL + "/project/create";
 export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 
-//project 
+//File 
 // export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
 // export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
+
+// Resend Verification Email
 

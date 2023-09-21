@@ -79,7 +79,15 @@
   transform-origin: center;
   
 }
+.forget {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.forget:hover{
+    scale: 1.05;
+    color: aqua;
 
+}
 
 @keyframes rotate {
 

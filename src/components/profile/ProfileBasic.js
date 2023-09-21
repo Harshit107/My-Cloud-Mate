@@ -31,7 +31,6 @@ const ProfileBasic = () => {
         }
         if (data) {
             if (typeof data.message === 'object') {
-                console.log(data.message);
                 setProfileData(data.message)
             }
             else

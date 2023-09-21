@@ -7,7 +7,6 @@ function isFirstGreater(x, y) {
 }
 
 export const sortedData = (data, action) => {
-    console.log(data, action);
     if (action.sortBy === 'last') {
 
         if (action.field === 'created') {

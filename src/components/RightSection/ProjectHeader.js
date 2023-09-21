@@ -42,7 +42,6 @@ const ProjectHeader = () => {
     }
     function initialize() {
         document.body.onfocus = checkIt;
-        console.log('initializing');
     }
     function checkIt() {
         document.body.onfocus = null;

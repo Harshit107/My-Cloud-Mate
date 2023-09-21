@@ -11,7 +11,10 @@ import useInput from '../../hooks/useInput';
 
 const ChangePassword = (props) => {
     const [showOTPBox, setShowOTPBox] = useState(false)
+    const [displayErrorMessage, setDisplayErrorMessage] = useState(false)
     const { isLoading, handleAPICall, error: serverError, data, reset } = useServer();
+
+
 
     async function handleSendEmailVerification() {
         reset();
@@ -25,11 +28,30 @@ const ChangePassword = (props) => {
 
     async function handleOtpVerification() {
         reset();
-        if (showOTPErrorMessage)
+        if (otpError) {
+            setDisplayErrorMessage("Enter valid OTP")
             return;
-        const data = await handleAPICall(OTP_VERIFY_API, 'POST', { otp: otpData, email: emailData })
+        }
+
+        if (passwordError) {
+            setDisplayErrorMessage("Password must be minimum 6 digit")
+            return;
+        }
+
+
+        if (newPasswordError) {
+            setDisplayErrorMessage("Password must match")
+            return;
+        }
+
+        const data = await handleAPICall(OTP_VERIFY_API, 'POST', {
+            otp: otpData,
+            email: emailData,
+            password: passwordData
+        })
         if (!data)
             return
+        props.cancelBackdrop();
     }
 
     const {
@@ -53,18 +75,19 @@ const ChangePassword = (props) => {
         error: passwordError,
         blurHandler: passwordBlur,
         textChangeHandler: passwordTextChange,
-        showErrorMessage: showPasswordErrorMessage
     } = useInput(data => data.length > 6);
 
     const {
-        data: newPasswordData,
+        data : newPasswordData,
         error: newPasswordError,
         blurHandler: newPasswordBlur,
         textChangeHandler: newPasswordTextChange,
-        showErrorMessage: showNewPasswordErrorMessage
     } = useInput(data => data.length > 6 && passwordData === data);
 
-    
+    useEffect(() => {
+        setDisplayErrorMessage('')
+    }, [otpData, passwordData, newPasswordData])
+
 
     useEffect(() => {
 
@@ -76,6 +99,7 @@ const ChangePassword = (props) => {
                 setShowOTPBox(true);
             toast.info(data.message)
         }
+
     }, [serverError, data])
 
     return (
@@ -101,29 +125,31 @@ const ChangePassword = (props) => {
 
             }} />}
 
-            {otpError && <p className={classes.error}>Enter valid OTP</p>}
-            {isLoading && <p className={classes.info}>Verifying OTP, Please wait...</p>}
-
 
             {showOTPBox && <Input input={{
-                name: 'OTP',
+                name: 'New Password',
                 placeholder: ' ',
                 type: 'password',
-                onChange: otpTextChange,
-                onBlur: otpBlur,
+                onChange: passwordTextChange,
+                onBlur: passwordBlur,
                 disabled: !showOTPBox,
 
             }} />}
 
             {showOTPBox && <Input input={{
-                name: 'OTP',
+                name: 'Confirm Password',
                 placeholder: ' ',
                 type: 'password',
-                onChange: otpTextChange,
-                onBlur: otpBlur,
+                onChange: newPasswordTextChange,
+                onBlur: newPasswordBlur,
                 disabled: !showOTPBox,
 
             }} />}
+
+            {displayErrorMessage && <p className={classes.error}>{displayErrorMessage}</p>}
+
+            {isLoading && <p className={classes.info}>Loading, Please wait...</p>}
+
 
             <div className={classes.btnDiv}>
 

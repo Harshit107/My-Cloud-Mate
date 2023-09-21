@@ -44,7 +44,7 @@ const ProjectDetailModelData = (props) => {
             size: fileSize(props.selectedFile.size),
             createdAt: currentTimestamp,
             updatedAt: currentTimestamp,
-            type: props.selectedFile.name.substring(props.selectedFile.name.lastIndexOf('.') + 1),
+            type: (props.selectedFile.name.substring(props.selectedFile.name.lastIndexOf('.') + 1)).toLowerCase(),
             projectId: ctx.activeProjectId,
             location : "Not set yet",
             downloadUrl: downloadURL
@@ -56,7 +56,7 @@ const ProjectDetailModelData = (props) => {
             if (!result)
                 return;
             props.removeBackdrop();
-            ctx.addNewFile({...fileDetail, _id : result._id});
+            ctx.addNewFile({...fileDetail, ...result.file });
         }
 
     }, [ctx, props, handleAPICall, downloadURL]);
@@ -91,7 +91,7 @@ const ProjectDetailModelData = (props) => {
             {(isFileUploading) && (
                 <div className={classes['progress-container']} >
                     <div className={classes['progress-bar']} id="progress" >
-                        {uploadProgress}%
+                        {uploadProgress < 1 ? 1 : uploadProgress}%
                     </div>
                 </div>
             )}

@@ -9,7 +9,6 @@ const useInput = (validationHandler) => {
 
     function textChangeHandler(e) {
         setData(e.target.value)
-        
         if(validationHandler(data))
             setError(false)            
         else

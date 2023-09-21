@@ -18,7 +18,6 @@ const ProjectContent = () => {
     }
 
     function openProjectDetailPage(index) {
-        console.log(index);
         setProjectToOpen(files[index])
     }
 

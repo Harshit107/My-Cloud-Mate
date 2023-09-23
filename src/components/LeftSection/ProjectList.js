@@ -17,7 +17,7 @@ const ProjectList = () => {
             {projects.length === 1 && <p className={classes['no-project-found']}>
                 We've set up a default project for you to explore the features and get started. To keep your projects organized and separate, Press New Project</p>
             }
-            {projects &&
+            {projects.length !== 0 &&
                 <ul className={classes['ul']}>
                     {projects.map(project => (
                         <li key={project._id}

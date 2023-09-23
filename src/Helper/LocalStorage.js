@@ -1,8 +1,8 @@
 const defaultData = {
     isAuthenticated: false,
     files: [],
-    activeProjectId: '123456789123456',
-    projects: [{ id: '123456789123456', name: "Default Projet" }],
+    activeProjectId: '0',
+    projects: [],
     availableFiles: [],
     token: ""
 };
@@ -31,6 +31,9 @@ export const setDataToLocalStorage = (data) => {
             data.token = ""
     }
     return window.localStorage.setItem('myData', JSON.stringify(data))
+}
+export const deleteLoacalStorage = () => {
+    window.localStorage.setItem('myData', JSON.stringify(defaultData))
 }
 
 export const getTokenFromLocalStorage = () => {

@@ -63,16 +63,34 @@ const fileReducer = (state, action) => {
     
     if(action.type === 'REMOVE_PROJECT') {
         const newProjects = state.projects.filter(project => project._id !== action.id);
+        const files = state.files.filter(file => file.projectId !== action.id);
         const activeProjectId = getDefaultProjectId(state);
-        return  {
-            activeProjectId: activeProjectId,
-            files: state.files,
-            availableFiles: state.availableFiles,
-            projects : newProjects,
-            token : state.token,
-            isAuthenticated : state.isAuthenticated
-
-        }
+        return {
+          activeProjectId: activeProjectId,
+          files: files,
+          availableFiles: state.availableFiles,
+          projects: newProjects,
+          token: state.token,
+          isAuthenticated: state.isAuthenticated,
+        };
+    }
+ 
+    if(action.type === 'REMOVE_FILE') {
+        const newFiles = state.files.filter(
+          (file) => file._id !== action._id
+        );
+        const availableFiles = state.availableFiles.filter(
+          (file) => file._id !== action._id
+        );
+        const activeProjectId = getDefaultProjectId(state);
+        return {
+          activeProjectId: activeProjectId,
+          files: newFiles,
+          availableFiles: availableFiles,
+          projects: state.projects,
+          token: state.token,
+          isAuthenticated: state.isAuthenticated,
+        };
     }
 
     if(action.type === 'ADD_FILE') {
@@ -162,6 +180,14 @@ const FileProvider = (props) => {
             id: id,
         })
     }
+        
+
+    const removeFileHandler = (id) => {
+        dispatchfiles({
+            type: 'REMOVE_FILE',
+            _id: id,
+        })
+    }
     
 
     const updateAvailableFilesHandler = (files) => {
@@ -203,6 +229,7 @@ const FileProvider = (props) => {
         selectedFilesFun: selectProjectHandler,
         addNewProject : addNewProjectHandler,
         addNewFile : addNewFileHandler,
+        removeFile : removeFileHandler,
         removeProject : removeProjectHandler,
         updateAvailableFiles : updateAvailableFilesHandler,
         updateIsAuthenticated : updateIsAuthenticatedHandler, 

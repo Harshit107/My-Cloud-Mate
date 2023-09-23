@@ -65,7 +65,8 @@ const ProjectDetailModelData = (props) => {
 
         if (uploadProgress > 1 && uploadProgress < 99.9) {
             const progressBar = document.getElementById('progress')
-            progressBar.style.width = uploadProgress + '%';
+            progressBar.style.width =
+              uploadProgress < 1 ? 1 : uploadProgress + "%";
             progressBar.innerHTML = uploadProgress + '%';
         }
 

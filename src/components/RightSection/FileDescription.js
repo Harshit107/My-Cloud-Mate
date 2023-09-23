@@ -9,6 +9,9 @@ import Button from "../../Util/Button";
 import FileDescriptionDiv from "./FileDescriptionDiv";
 import { convertDateToString } from "../../Helper/Common";
 import { useState } from "react";
+import ButtonWithAddIcon from "./../../Util/ButtonWithAddIcon";
+import DeleteImage from "../../images/delete-icon-white.png";
+import DeleteFileModal from "../../Util/Modals/DeleteFileModal";
 
 const iconStore = {
   PDF: PdfIcon,
@@ -17,18 +20,29 @@ const iconStore = {
 };
 
 const supportedType = (type) => {
-    return ["png", "jpg", "jpeg", "gif","PNG","JPG","JPEG"].includes(type);
-}
+  return ["png", "jpg", "jpeg", "gif", "PNG", "JPG", "JPEG"].includes(type);
+};
 
 const FileDescription = (props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   function handleImageLoaded() {
     const actualFile = document.getElementById("actualFile");
-    actualFile.style.height = 'auto'
+    actualFile.style.height = "auto";
+    actualFile.style.opacity = "1";
     setIsImageLoaded(true);
   }
 
+//   async function onDeleteClick() {
+//     const data = await handleAPICall(DELETE_File, "POST", {
+//       fileId: props._id,
+//     });
+//     if (!data) return;
+//     toast.success("File deleted successfully");
+
+//     props.removeBackdrop();
+//   }
 
   const srcImage = () => {
     if (supportedType(props.type)) return props.downloadUrl;
@@ -48,7 +62,7 @@ const FileDescription = (props) => {
           alt=" icon type"
           className={`${classes["fileIcon"]} `}
           id="actualFile"
-          height='0px'
+          height="0px"
           onLoad={handleImageLoaded}
         />
       )}
@@ -56,7 +70,7 @@ const FileDescription = (props) => {
         <img
           src={loadingImage}
           alt="loading img"
-          className={`${classes["fileIcon"]} ${classes.rotate}`}
+          className={`${classes["fileIconLoading"]} ${classes.rotate}`}
         />
       )}
 
@@ -77,6 +91,28 @@ const FileDescription = (props) => {
         title="Updated"
         value={convertDateToString(props.updatedAt)}
       />
+
+      <div className={classes.delete}>
+        <ButtonWithAddIcon
+          buttonName="Delete"
+          image={DeleteImage}
+          className={classes.deleteBtn}
+          action={{ onClick: () => setShowDeleteModal(true) }}
+        ></ButtonWithAddIcon>
+      </div>
+
+      {showDeleteModal && (
+        <DeleteFileModal
+         _id =  {props._id}
+          cancelClicked={() => {
+            setShowDeleteModal(false);
+          }}
+          removeBackdrop={() => {
+            setShowDeleteModal(false);
+            props.removeBackdrop();
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -13,6 +13,7 @@ const availableFilesContext = createContext({
     addNewProject : () => {},
     addNewFile : () => {},
     removeProject : () => {},
+    removeFile : () => {},
     updateAvailableFiles : () => {},
     updateAllData : () => {},
     updateIsAuthenticated : () => {},

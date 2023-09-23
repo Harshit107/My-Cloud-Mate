@@ -24,6 +24,7 @@ export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 //File 
 // export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
+export const DELETE_File = BASE_API_URL + "/file/delete";
 // export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 
 // Resend Verification Email

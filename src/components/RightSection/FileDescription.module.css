@@ -16,6 +16,13 @@
 
 .fileIcon {
     width: 150px;
+    height: 0px;
+    opacity: 0;
+    transition: 2s ease;
+}
+
+.fileIconLoading {
+    width: 100px;
     height: auto;
 }
 
@@ -38,6 +45,21 @@
 .rotate {
     animation: rotate 3s infinite;
     border: 0px;
+}
+
+.delete {
+    position: absolute;
+    bottom: 10px;
+    padding: 10px 0px;
+}
+.deleteBtn {
+    background-color: rgb(248, 43, 43);
+    box-shadow: -1px 2px 2px rgb(199, 2, 2);
+    color: whitesmoke;
+}
+.deleteBtn:hover {
+    background-color: rgb(199, 2, 2);
+    box-shadow: none;
 }
 
 @keyframes rotate {

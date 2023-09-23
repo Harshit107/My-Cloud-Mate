@@ -119,8 +119,6 @@ const SignupPage = (props) => {
                 {!buttonIsVisible && <div className={` ${classes['loader-container']} ${classes.visible}`}>
                     <img src={loadingImage} className={classes.loadingImg} alt='Loading..' />
                 </div>}
-
-                <p className={classes.p}>Forget Password?</p>
                 {serverError && <p className={classes.invalidPassword}>{serverError}</p>}
                 <p className={classes.createP}>Already have an account ?<span className={classes.span} onClick={props.onStartAnimation.bind(null, 'signup')}>Login</span></p>
             </form>

@@ -36,7 +36,7 @@ const DeleteFileModal = (props) => {
       </p>
       {isLoading && (
         <p className={`${classes.info} ${classes.p}`}>
-          Please wait, Deleting project...
+          Please wait, Deleting file...
         </p>
       )}
       <div className={classes.btnDiv}>

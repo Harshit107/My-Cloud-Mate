@@ -61,3 +61,25 @@
      color: var(--text-2);;
      cursor: pointer;
 }
+
+
+
+@media (max-height: 700px) {
+  /* Your styles for heights less than 650 pixels go here */
+  /* For example, you could change the background color */
+  .img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+  .p {
+    color: var(--text-2);
+    margin-bottom: 0px;
+  }
+
+  .error {
+    margin-top: -15px;
+    text-align: left;
+    width: 100%;
+  }
+}

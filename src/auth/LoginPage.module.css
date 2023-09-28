@@ -1,108 +1,121 @@
-
 .loginContainer {
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
 }
 
 .form {
-    height: 100%;
-    width: 80%;
-    float: right;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 80%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.img{
-    width: 250px;
-    height: 250px;
-    text-align: center;
-    margin-top: 50px;
-    mix-blend-mode: var(--bg-1);
+.img {
+  width: 250px;
+  height: 250px;
+  text-align: center;
+  margin-top: 50px;
+  mix-blend-mode: var(--bg-1);
 }
 .p {
-    color: var(--text-2);
-    margin-top: 5px;
-    margin-bottom: 20px;
+  color: var(--text-2);
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 .createP {
-    position: absolute;
-    bottom: 20px;
-    text-align: center;
-    width: 80%;
-    
-
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  width: 80%;
 }
 .span {
-    margin-left: 10px;
-    color: var(--text-2);
-    display: inline-block; /* Add this to ensure the element takes up space */
-    cursor: pointer;
+  margin-left: 10px;
+  color: var(--text-2);
+  display: inline-block; /* Add this to ensure the element takes up space */
+  cursor: pointer;
 }
-.error{
-    color: red;
-    font-size: 14px;
-    padding-top: 0px;
-    text-align: left;
-    width: 100%;
+.error {
+  color: red;
+  font-size: 14px;
+  padding-top: 0px;
+  text-align: left;
+  width: 100%;
 }
-.invalidPassword{
-    color: rgb(237, 45, 45);
-    font-size: 17px;
-    padding-top: 0px;
-    text-align: center;
+.invalidPassword {
+  color: rgb(237, 45, 45);
+  font-size: 17px;
+  padding-top: 0px;
+  text-align: center;
 }
-
 
 .loader-container {
-   
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-}   
-
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
 
 .loadingImg {
   width: 40px;
   height: inherit;
   padding: 0px;
-  animation: rotate 2s linear infinite ;
+  animation: rotate 2s linear infinite;
   transform-origin: center;
-  
 }
 .forget {
-    cursor: pointer;
-    transition: 0.3s ease;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
-.forget:hover{
-    scale: 1.05;
-    color: aqua;
-
+.forget:hover {
+  scale: 1.05;
+  color: aqua;
 }
 
 @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    scale: 0.75;
+  }
 
-    0% {
-        transform: rotate(0deg);
-        scale: 0.75;
-      }
+  50% {
+    transform: rotate(180deg);
+    scale: 1;
+  }
+  100% {
+    transform: rotate(360deg); /* You can adjust the rotation angle */
+    scale: 0.75;
+  }
+}
 
-    50% {
-        transform: rotate(180deg);
-        scale: 1;
-      }
-      100% {
-        transform: rotate(360deg); /* You can adjust the rotation angle */
-        scale: 0.75;
-      }
-    
+/* -------------------------------------------------------------------------------------- */
+/* media query */
+
+@media (max-height: 700px) {
+  /* Your styles for heights less than 650 pixels go here */
+  /* For example, you could change the background color */
+  .img {
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
+  }
+  .p {
+    color: var(--text-2);
+    margin-bottom: 0px;
+  }
+
+  .error {
+    margin-top: -15px;
+    text-align: left;
+    width: 100%;
+  }
 }

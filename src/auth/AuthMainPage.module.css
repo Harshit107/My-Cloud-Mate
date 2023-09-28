@@ -1,5 +1,5 @@
 .authContainer {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: 
     linear-gradient(to right, #2929281c, #29282848), /* Gradient Layer */
@@ -7,10 +7,11 @@
     object-fit: unset;
     padding: 0px;
     margin: 0px;
-    margin-right: 10px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .main {
     width: 50%;
@@ -81,4 +82,30 @@
         transform: translateX(0px) scale(0.95);
         
     }
+}
+
+
+@media (max-width: 500px) {
+  /* Your styles for heights less than 650 pixels go here */
+  /* For example, you could change the background color */
+
+  .welcomeMessage {
+    width: 0%;
+    overflow: hidden;
+    visibility: hidden;
+    padding: 0px;
+  }
+
+  .main {
+    width: 100%;
+  }
+  .loginContainer {
+    width: 80%;
+    height: 80%;
+  }  
+  .signupContainer {
+    width: 80%;
+    height: 80%;
+  }
+    
 }

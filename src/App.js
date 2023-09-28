@@ -12,6 +12,7 @@ import {  ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 initializeLocalStorage();
+// alert(window.innerWidth+" "+ window.innerHeight)
 
 const App = () => {
   const route = createBrowserRouter([

@@ -56,6 +56,8 @@ const ProjectDetailModelData = (props) => {
             if (!result)
                 return;
             props.removeBackdrop();
+            console.log(fileDetail);
+            console.log(result.file);
             ctx.addNewFile({...fileDetail, ...result.file });
         }
 

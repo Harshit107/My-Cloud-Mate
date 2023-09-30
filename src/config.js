@@ -15,6 +15,7 @@ export const PROFILE_TOKEN_API = BASE_API_URL + "/users/profile/token";
 export const SEND_VERIFICATION_API = BASE_API_URL + "/users/verification/email";
 export const SEND_OTP = BASE_API_URL + "/users/forget";
 export const OTP_VERIFY_API = BASE_API_URL + "/users/verify/otp";
+export const UPLOAD_PROFILE_IMAGE = BASE_API_URL + "/profile/image";
 
 //project 
 export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";

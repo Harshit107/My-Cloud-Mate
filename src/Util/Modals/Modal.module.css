@@ -1,25 +1,31 @@
 .modal {
-    width: 600px;
-    ;
-    background-color: var(--bg-1);
-    /* background-color: var(--border-white); */
-    border-radius: 20px;
-    /* box-shadow: 0 0 2px 7px #acabab67; */
-    border: 2px solid var(--text-1);
-    pointer-events: auto;
-    display: flex;
-    justify-content:center ;
-    flex-direction: column;
-    color: var(--text-1);
-    font-family : sans-serif;
-    overflow: hidden;
-    
+  width: 600px;
+  background-color: var(--bg-1);
+  /* background-color: var(--border-white); */
+  border-radius: 20px;
+  /* box-shadow: 0 0 2px 7px #acabab67; */
+  border: 2px solid var(--text-1);
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--text-1);
+  font-family: sans-serif;
+  overflow: hidden;
 }
 h2 {
-    background-color: var(--text-0);
-    color: white;
-    padding: 10px;
+  background-color: var(--text-0);
+  color: white;
+  padding: 10px;
 }
-.modelElement{
-    padding: 10px 20px 20px 20px;
+.modelElement {
+  padding: 10px 20px 20px 20px;
+}
+
+@media (max-width: 700px) {
+  /* Your styles for heights less than 650 pixels go here */
+  /* For example, you could change the background color */
+    .modal {
+          width: 87%;
+    }
 }

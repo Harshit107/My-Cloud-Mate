@@ -80,53 +80,93 @@ const LoginPage = (props) => {
 
 
     return (
-        <div className={classes.loginContainer} >
-            <img src={loginImage} alt='icon' className={classes.img} />
+      <div className={classes.loginContainer}>
+        <img src={loginImage} alt="icon" className={classes.img} />
 
-            <form className={classes.form} onSubmit={submitFormHandler}>
-                <p className={classes.p}>Login with Email and Password</p>
+        <form className={classes.form} onSubmit={submitFormHandler}>
+          <p className={classes.p}>Login with Email and Password</p>
 
-                <Input
-                    input={{
-                        name: 'Email',
-                        placeholder: ' ',
-                        type: 'email', onChange: emailTextChange,
-                        onBlur: emailBlue,
-                        disabled: !buttonIsVisible,
-                        autoComplete: "email",
+          <Input
+            input={{
+              name: "Email",
+              placeholder: " ",
+              type: "email",
+              onChange: emailTextChange,
+              onBlur: emailBlue,
+              disabled: !buttonIsVisible,
+              autoComplete: "email",
+            }}
+          ></Input>
+          {emailError && (
+            <p className={classes.error}>Enter valid email address</p>
+          )}
+          <Input
+            input={{
+              name: "Password",
+              placeholder: " ",
+              type: "password",
+              onChange: passwordTextChange,
+              onBlur: passwordBlue,
+              disabled: !buttonIsVisible,
+              autoComplete: "password",
+            }}
+          />
 
-                    }} >
-                </Input>
-                {emailError && <p className={classes.error}>Enter valid email address</p>}
-                <Input
-                    input={{
-                        name: 'Password',
-                        placeholder: ' ',
-                        type: 'password', onChange: passwordTextChange,
-                        onBlur: passwordBlue,
-                        disabled: !buttonIsVisible,
-                        autoComplete: "password",
+          {!emailVerified && (
+            <ResendVerificationModal
+              removeBackdrop={() => setEmailIsVerified(true)}
+              email={emailData}
+            />
+          )}
+          {passwordError && (
+            <p className={classes.error}>Password must be minimum 8 digit</p>
+          )}
 
-                    }}
-                />
+          {buttonIsVisible && (
+            <Button disabled={formBecomeInvalid} className={classes.visible}>
+              Login
+            </Button>
+          )}
 
-                {!emailVerified && <ResendVerificationModal removeBackdrop={() => setEmailIsVerified(true)} email={emailData} />}
-                {passwordError && <p className={classes.error}>Password must be minimum 8 digit</p>}
+          {!buttonIsVisible && (
+            <div
+              className={` ${classes["loader-container"]} ${classes.visible}`}
+            >
+              <img
+                src={loadingImage}
+                className={classes.loadingImg}
+                alt="Loading.."
+              />
+            </div>
+          )}
+          {serverError && (
+            <p className={classes.invalidPassword}>{serverError}</p>
+          )}
+          {showPasswordModal && (
+            <ChangePassword
+              removeBackdrop={() => ""}
+              cancelBackdrop={handleRemoveBackdrop}
+            />
+          )}
+          <p
+            className={`${classes.p} ${classes.forget}`}
+            onClick={() => setShowPasswordModal(true)}
+          >
+            Forget Password?
+          </p>
 
-                {buttonIsVisible && <Button disabled={formBecomeInvalid} className={classes.visible}>Login</Button>}
-
-                {!buttonIsVisible && <div className={` ${classes['loader-container']} ${classes.visible}`}>
-                    <img src={loadingImage} className={classes.loadingImg} alt='Loading..' />
-                </div>}
-
-                {showPasswordModal && <ChangePassword removeBackdrop = {() => ''} cancelBackdrop = { handleRemoveBackdrop}/>}
-                <p className={`${classes.p} ${classes.forget}`} onClick={() => setShowPasswordModal(true)}>Forget Password?</p>
-                {serverError && <p className={classes.invalidPassword}>{serverError}</p>}
-
-                <p className={classes.createP}>Don't have a account ?<span className={classes.span} onClick={props.onStartAnimation.bind(null, 'login')}>Signup</span></p>
-            </form >
-        </div>
-    )
+          <p className={classes.createP}>
+            Don't have a account ?
+            <span
+              className={classes.span}
+              onClick={props.onStartAnimation.bind(null, "login")}
+            >
+              Signup
+            </span>
+          </p>
+        </form>
+      </div>
+    );
 }
 
 export default LoginPage;

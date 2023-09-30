@@ -2,7 +2,6 @@ export const APP_NAME = "My-Cloud-Mate"
 
 const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
 // const BASE_API_URL = "http://localhost:3001";
-const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
 // const BASE_API_URL_PROD  = "http://localhost:3001";
 
 export const REGISTRATION_API = BASE_API_URL + "/users/create";

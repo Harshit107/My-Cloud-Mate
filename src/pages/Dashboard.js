@@ -40,7 +40,7 @@ const Dashboard = () => {
     <>
       {/* {projectLoading && } */}
       {projectLoading && <TopLoading message='Fetching data,' />}
-      {projectError && <Retry />}
+      {/* {projectError && <Retry />} */}
       {!projectLoading && <Homepage />}
     </>
   )

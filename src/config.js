@@ -1,6 +1,8 @@
 export const APP_NAME = "My-Cloud-Mate"
 
 const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
+// const BASE_API_URL = "http://localhost:3001";
+const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
 // const BASE_API_URL_PROD  = "http://localhost:3001";
 
 export const REGISTRATION_API = BASE_API_URL + "/users/create";
@@ -15,6 +17,7 @@ export const PROFILE_TOKEN_API = BASE_API_URL + "/users/profile/token";
 export const SEND_VERIFICATION_API = BASE_API_URL + "/users/verification/email";
 export const SEND_OTP = BASE_API_URL + "/users/forget";
 export const OTP_VERIFY_API = BASE_API_URL + "/users/verify/otp";
+export const UPLOAD_PROFILE_IMAGE = BASE_API_URL + "/profile/image";
 
 //project 
 export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";

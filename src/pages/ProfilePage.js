@@ -6,9 +6,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         bodyOverflow();
-
         return () => bodyOverflow();
-
     },[])
 
     return <>

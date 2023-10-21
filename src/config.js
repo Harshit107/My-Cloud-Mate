@@ -1,4 +1,4 @@
-export const APP_NAME = "My-Cloud-Mate";
+export const APP_NAME = "MyCloudMate";
 export const APP_EMAIL = "MyCloudMate";
 export const REPLY_TO = "contact@harshit107.in";
 

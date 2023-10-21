@@ -1,0 +1,30 @@
+.actionButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.actionButton > img {
+  padding: 9px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.actionButton > img:hover {
+  border-color: var(--text-1);
+  transform: scale(1.05);
+  
+}
+
+.copy {
+  content: url("../../images/copy.svg");
+}
+.mail {
+  content: url("../../images/mail.svg");
+}
+.rupee {
+  color: wheat;
+  content: url("../../images/rupee.svg");
+}

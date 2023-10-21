@@ -1,4 +1,6 @@
-export const APP_NAME = "My-Cloud-Mate"
+export const APP_NAME = "My-Cloud-Mate";
+export const APP_EMAIL = "MyCloudMate";
+export const REPLY_TO = "contact@harshit107.in";
 
 const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
 // const BASE_API_URL = "http://localhost:3001";
@@ -18,16 +20,13 @@ export const SEND_OTP = BASE_API_URL + "/users/forget";
 export const OTP_VERIFY_API = BASE_API_URL + "/users/verify/otp";
 export const UPLOAD_PROFILE_IMAGE = BASE_API_URL + "/profile/image";
 
-//project 
+//project
 export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_PROJECT = BASE_API_URL + "/project/create";
 export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 
-//File 
+//File
 // export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
 export const DELETE_File = BASE_API_URL + "/file/delete";
-// export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
-
-// Resend Verification Email
-
+export const SEMD_EMAIL = "https://email.api.harshit107.tech/public/email/notification";

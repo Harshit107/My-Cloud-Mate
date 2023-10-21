@@ -18,8 +18,10 @@ const fileSize = (size) => {
 
 let isFileSetToDatabase = false;
 
-const ProjectDetailModelData = (props) => {
+const ProjectDetailModelData = (props) => {  
   const ctx = useContext(FileContext);
+
+  
 
   const {
     isFileUploading,
@@ -29,7 +31,10 @@ const ProjectDetailModelData = (props) => {
     downloadURL,
   } = useFileUploader();
 
-  const { error, handleAPICall } = useServer();
+  let { error, handleAPICall } = useServer();
+  if (props.selectedFile.size > 5000000) {
+    error = "File Size must be less than 5 Mb"
+  }
 
   function handleUploadFile(file) {
     isFileSetToDatabase = false;
@@ -61,26 +66,20 @@ const ProjectDetailModelData = (props) => {
         if (!result) return;
         props.removeBackdrop();
         ctx.addNewFile({ ...fileDetail, ...result.file });
-      }
-      else if(props.isProfileImage) {
-         const result = await handleAPICall(
-           UPLOAD_PROFILE_IMAGE,
-           "POST",
-           fileDetail
-         );
-         if (!result) return;
-         props.removeBackdrop();
-         window.location.reload();
-      }
-      else {
-         const result = await handleAPICall(
-           UPLOAD_NEW_File,
-           "POST",
-           fileDetail
-         );
-         if (!result) return;
-         props.removeBackdrop();
-         ctx.addNewFile({ ...fileDetail, ...result.file });
+      } else if (props.isProfileImage) {
+        const result = await handleAPICall(
+          UPLOAD_PROFILE_IMAGE,
+          "POST",
+          fileDetail
+        );
+        if (!result) return;
+        props.removeBackdrop();
+        window.location.reload();
+      } else {
+        const result = await handleAPICall(UPLOAD_NEW_File, "POST", fileDetail);
+        if (!result) return;
+        props.removeBackdrop();
+        ctx.addNewFile({ ...fileDetail, ...result.file });
       }
     }
   }, [ctx, props, handleAPICall, downloadURL]);
@@ -120,7 +119,7 @@ const ProjectDetailModelData = (props) => {
           File Uploaded Successfully, Arranging files for you...
         </p>
       )}
-
+      {error && <p className={classes.error}>{error}</p>}
       <div className={classes.btnDiv}>
         <Button
           onClick={() => props.removeBackdrop()}
@@ -131,7 +130,11 @@ const ProjectDetailModelData = (props) => {
         <Button
           onClick={() => handleUploadFile(props.selectedFile)}
           className={classes.btn}
-          disabled={isFileUploading || isUploadingCompleted}
+          disabled={
+            isFileUploading ||
+            isUploadingCompleted ||
+            props.selectedFile.size > 5000000
+          }
         >
           Upload
         </Button>

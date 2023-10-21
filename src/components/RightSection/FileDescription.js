@@ -12,6 +12,8 @@ import { useState } from "react";
 import ButtonWithAddIcon from "./../../Util/ButtonWithAddIcon";
 import DeleteImage from "../../images/delete-icon-white.png";
 import DeleteFileModal from "../../Util/Modals/DeleteFileModal";
+import ImageButtom from "./ImageButtom";
+
 
 const iconStore = {
   PDF: PdfIcon,
@@ -34,15 +36,15 @@ const FileDescription = (props) => {
     setIsImageLoaded(true);
   }
 
-//   async function onDeleteClick() {
-//     const data = await handleAPICall(DELETE_File, "POST", {
-//       fileId: props._id,
-//     });
-//     if (!data) return;
-//     toast.success("File deleted successfully");
+  //   async function onDeleteClick() {
+  //     const data = await handleAPICall(DELETE_File, "POST", {
+  //       fileId: props._id,
+  //     });
+  //     if (!data) return;
+  //     toast.success("File deleted successfully");
 
-//     props.removeBackdrop();
-//   }
+  //     props.removeBackdrop();
+  //   }
 
   const srcImage = () => {
     if (supportedType(props.type)) return props.downloadUrl;
@@ -80,9 +82,13 @@ const FileDescription = (props) => {
       >
         Open
       </Button>
+
+        <ImageButtom {...props}/>
+
       <FileDescriptionDiv title="Name" value={props.name} />
       <FileDescriptionDiv title="Type" value={props.type} />
       <FileDescriptionDiv title="Size" value={props.size} />
+
       <FileDescriptionDiv
         title="Created"
         value={convertDateToString(props.createdAt)}
@@ -103,7 +109,7 @@ const FileDescription = (props) => {
 
       {showDeleteModal && (
         <DeleteFileModal
-         _id =  {props._id}
+          _id={props._id}
           cancelClicked={() => {
             setShowDeleteModal(false);
           }}

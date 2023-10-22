@@ -24,7 +24,7 @@ export default function ImageButtom(props) {
         alt="copy"
         onClick={() => {
           navigator.clipboard.writeText(props.downloadUrl);
-          toast.info("Text copied successfully");
+          toast.info("Download url copied successfully");
         }}
       />
       <img

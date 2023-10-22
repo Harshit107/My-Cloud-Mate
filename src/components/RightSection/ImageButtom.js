@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import classes from "./ImageButtom.module.css";
 import { toast } from "react-toastify";
 import EmailSenderModel from "../../Util/Modals/EmailSenderModel";
+import PaymentModal from "../../Util/Modals/PaymentModal";
 
 export default function ImageButtom(props) {
   const [isMailModelOpen, setMailModelOpen] = useState(false);
+  const [isPaymentMode, setPaymentMode] = useState(false);
 
   function handleOpenEmailSender() {
     setMailModelOpen(true)
+  }
+
+  function handleStartPayment() {
+    setPaymentMode(true);
   }
 
   return (
@@ -25,7 +31,8 @@ export default function ImageButtom(props) {
         alt="mail"
         onClick={handleOpenEmailSender}
       />
-      <img className={classes.rupee} alt="rupee" />
+      <img className={classes.rupee} alt="rupee" onClick={handleStartPayment} />
+      {isPaymentMode && <PaymentModal removeBackdrop = {() => setPaymentMode(false)} />}
       {isMailModelOpen && (
         <EmailSenderModel
           name={props.name}

@@ -25,8 +25,10 @@ export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_PROJECT = BASE_API_URL + "/project/create";
 export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 
-//File
-// export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
+export const PURCHASE_SESSION = BASE_API_URL + "/payment/checkout";
+
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
 export const DELETE_File = BASE_API_URL + "/file/delete";
 export const SEMD_EMAIL = "https://email.api.harshit107.tech/public/email/notification";
+
+

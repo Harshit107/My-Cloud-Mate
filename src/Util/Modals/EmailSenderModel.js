@@ -10,7 +10,7 @@ import { getFileSharingTemplate } from "../../template/FileShare";
 import useServer from "../../db/useServer";
 import { toast } from "react-toastify";
 
-const CreateProjectModal = (props) => {
+const EmailSenderModal = (props) => {
   const [email, setEmail] = useState("");
   const {handleAPICall, isLoading, error} = useServer()
 
@@ -83,4 +83,4 @@ const CreateProjectModal = (props) => {
   );
 };
 
-export default CreateProjectModal;
+export default EmailSenderModal;

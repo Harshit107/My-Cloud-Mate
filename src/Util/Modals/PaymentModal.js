@@ -4,7 +4,7 @@ import Button from "../Button";
 import { useEffect } from "react";
 // import { loadStripe } from "@stripe/stripe-js";
 import useServer from "../../db/useServer";
-import { PURCHASE_SESSION } from "../../config";
+import { PAYMENT_UNDER_DEVELOPEMENT, PURCHASE_SESSION } from "../../config";
 import { toast } from "react-toastify";
 
 const PaymentModal = (props) => {
@@ -14,11 +14,11 @@ const PaymentModal = (props) => {
     if (error) {
       toast.error("Something went wrong : ", error);
       reset();
-    }
-    
+    }    
   }, [error, reset]);
 
-  async function handleSendEmail() {
+  async function handlePaymentStart() {
+    
     const body = {
       items: [
         {
@@ -49,7 +49,10 @@ const PaymentModal = (props) => {
       <p className={classes.detail}>* Unlimited Url Shorten</p>
       <p className={classes.detail}>* Upload large files</p>
       {serverLoading && (
-        <p className={classes.info}>Sending Email, please wait...</p>
+        <p className={classes.info}>Sending Payment Request, please wait...</p>
+      )}
+      {PAYMENT_UNDER_DEVELOPEMENT && (
+        <p className={classes.info}>Payment section is under developement</p>
       )}
       <div className={classes.btnDiv}>
         <Button
@@ -62,8 +65,8 @@ const PaymentModal = (props) => {
           Cancel
         </Button>
         <Button
-          onClick={handleSendEmail}
-          disabled={serverLoading}
+          onClick={handlePaymentStart}
+          disabled={serverLoading || PAYMENT_UNDER_DEVELOPEMENT}
           className={classes.btn}
         >
           Pay

@@ -1,6 +1,7 @@
 export const APP_NAME = "My-Cloud-Mate";
 export const APP_EMAIL = "MyCloudMate";
 export const REPLY_TO = "contact@harshit107.in";
+export const PAYMENT_UNDER_DEVELOPEMENT = true;
 
 const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
 // const BASE_API_URL = "http://localhost:3001";

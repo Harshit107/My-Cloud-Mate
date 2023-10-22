@@ -13,6 +13,7 @@ export default function ImageButtom(props) {
   }
 
   function handleStartPayment() {
+    
     setPaymentMode(true);
   }
 

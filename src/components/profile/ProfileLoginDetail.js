@@ -47,19 +47,19 @@ const ProfileLoginDetail = () => {
             reset();
         }
         if (data) {
-            if (typeof data.message === 'object') {
-                const loginData = data.message;
-                loginData.unshift(loginBar)
-                setLoginDevices(loginData)
-            }
-            else {
-                toast.success(data.message);
-                getTokenDetail()
+            const rawTokens = Array.isArray(data.data) ? data.data : (Array.isArray(data.message) ? data.message : null);
+            if (rawTokens) {
+                const loginData = [...rawTokens];
+                loginData.unshift(loginBar);
+                setLoginDevices(loginData);
+            } else {
+                toast.success(data.message || "Action completed successfully");
+                getTokenDetail();
             }
             reset();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, reset, error])
+    }, [data, reset, error]);
 
 
 

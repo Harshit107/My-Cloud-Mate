@@ -16,15 +16,12 @@ const ResendVerificationModal = (props) => {
     }
 
     useEffect(() => {
-
-        if(error) {
-            toast.error(error.message)
+        if (error) {
+            toast.error(typeof error === 'string' ? error : error.message || "Failed to send verification email");
+        } else if (data) {
+            toast.success(data.message || "Verification email sent successfully");
         }
-        else if(data) {
-            toast.success(error.message)
-        }
-
-    }, [error, data])
+    }, [error, data]);
 
     return (
         <Modal removeBackdrop={props.removeBackdrop} title="Verification Required" email={props.email}>

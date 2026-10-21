@@ -31,20 +31,20 @@ const CreateProjectModal = (props) => {
     }, [error, reset])
 
     const addProjectToServer = async () => {
-
-         const data = await handleAPICall(UPLOAD_NEW_PROJECT, 'POST', {
+        const result = await handleAPICall(UPLOAD_NEW_PROJECT, 'POST', {
             projectName: projectName
-        })
-        if(!data){
+        });
+        if (!result) {
             return;
         }
+        const newProjectId = result.data?._id || result._id;
         ctx.addNewProject({
-            _id: data._id,
+            _id: newProjectId,
             projectName: projectName
-        })
+        });
         props.removeBackdrop();
-        ctx.selectedFilesFun(data._id);
-    }
+        ctx.selectedFilesFun(newProjectId);
+    };
 
     const handleBtnClick = () => {
         if (projectName.trim() === '') {

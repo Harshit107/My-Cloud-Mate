@@ -1,12 +1,34 @@
 export const APP_NAME = "My-Cloud-Mate";
 export const APP_EMAIL = "MyCloudMate";
-export const REPLY_TO = "contact@harshit107.in";
+export const REPLY_TO = "contact@harshit107.online";
 export const PAYMENT_UNDER_DEVELOPEMENT = true;
 
-const BASE_API_URL = "https://mycloudmate.api.harshit107.in";
-// const BASE_API_URL = "http://localhost:3001";
-// const BASE_API_URL_PROD  = "http://localhost:3001";
+// ======================= Storage Provider Strategy =======================
+export const STORAGE_PROVIDERS = {
+  FIREBASE: "FIREBASE",
+  CLOUDFLARE: "CLOUDFLARE",
+};
 
+/**
+ * ACTIVE STORAGE PROVIDER SWITCH:
+ * Set to STORAGE_PROVIDERS.CLOUDFLARE or STORAGE_PROVIDERS.FIREBASE
+ */
+export const ACTIVE_STORAGE_PROVIDER = STORAGE_PROVIDERS.CLOUDFLARE;
+
+const isLocalhost = Boolean(
+  typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "[::1]" ||
+      window.location.hostname.match(
+        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+      ))
+);
+
+const BASE_API_URL = isLocalhost
+  ? "http://localhost:3001"
+  : "https://mycloudmate.api.harshit107.online";
+
+// Auth & Users
 export const REGISTRATION_API = BASE_API_URL + "/users/create";
 export const LOGIN_API = BASE_API_URL + "/users/login";
 export const LOGOUT_API = BASE_API_URL + "/users/logout";
@@ -21,15 +43,15 @@ export const SEND_OTP = BASE_API_URL + "/users/forget";
 export const OTP_VERIFY_API = BASE_API_URL + "/users/verify/otp";
 export const UPLOAD_PROFILE_IMAGE = BASE_API_URL + "/profile/image";
 
-//project
+// Projects
 export const GET_PROJECT_DATA = BASE_API_URL + "/project/get";
 export const UPLOAD_NEW_PROJECT = BASE_API_URL + "/project/create";
 export const DELETE_PROJECT = BASE_API_URL + "/project/delete";
 
 export const PURCHASE_SESSION = BASE_API_URL + "/payment/checkout";
 
+// Files
+export const GET_PRESIGNED_URL_API = BASE_API_URL + "/file/presigned-url";
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
 export const DELETE_File = BASE_API_URL + "/file/delete";
 export const SEMD_EMAIL = "https://email.api.harshit107.tech/public/email/notification";
-
-

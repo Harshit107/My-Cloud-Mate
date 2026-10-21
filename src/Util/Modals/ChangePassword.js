@@ -90,17 +90,17 @@ const ChangePassword = (props) => {
 
 
     useEffect(() => {
-
         if (serverError) {
-            toast.error(serverError)
-        }
-        else if (data) {
-            if (data.status === 202)
+            toast.error(typeof serverError === 'string' ? serverError : serverError.message || "Action failed");
+        } else if (data) {
+            if (data.status === 202) {
                 setShowOTPBox(true);
-            toast.info(data.message)
+                toast.info(data.message || "OTP sent to your email");
+            } else {
+                toast.success(data.message || "Password changed successfully");
+            }
         }
-
-    }, [serverError, data])
+    }, [serverError, data]);
 
     return (
         <Modal removeBackdrop={props.removeBackdrop} title="Change Password" >

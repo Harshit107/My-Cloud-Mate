@@ -1,6 +1,9 @@
+import DOMAINS from "./config/domain";
+
+export { DOMAINS };
 export const APP_NAME = "My-Cloud-Mate";
 export const APP_EMAIL = "MyCloudMate";
-export const REPLY_TO = "contact@harshit107.online";
+export const REPLY_TO = DOMAINS.EMAIL.CONTACT_EMAIL;
 export const PAYMENT_UNDER_DEVELOPEMENT = true;
 
 // ======================= Storage Provider Strategy =======================
@@ -26,7 +29,7 @@ const isLocalhost = Boolean(
 
 const BASE_API_URL = isLocalhost
   ? "http://localhost:3001"
-  : "https://mycloudmate.api.harshit107.online";
+  : DOMAINS.CLOUD_MATE.API;
 
 // Auth & Users
 export const REGISTRATION_API = BASE_API_URL + "/users/create";

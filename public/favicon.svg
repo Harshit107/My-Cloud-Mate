@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Background linear gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a101d"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+
+    <!-- Cloud primary gradient -->
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="50%" stop-color="#02b4a5"/>
+      <stop offset="100%" stop-color="#008376"/>
+    </linearGradient>
+
+    <!-- Soft drop shadow -->
+    <filter id="cloudShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#02b4a5" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle container -->
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#1e293b" stroke-width="1.2" stroke-opacity="0.8"/>
+
+  <!-- Glowing Cloud Container -->
+  <g filter="url(#cloudShadow)">
+    <!-- Seamless Cloud Silhouette -->
+    <path d="M44.5 44H19.5C14.8056 44 11 40.1944 11 35.5C11 31.0655 14.394 27.4225 18.7369 27.0375C19.9238 21.3653 24.9602 17 31 17C37.8927 17 43.6231 22.1557 44.4277 28.8295C48.6726 29.5661 52 33.2676 52 37.75C52 41.2018 48.6421 44 44.5 44Z" fill="url(#cloudGrad)"/>
+    
+    <!-- Modern Secure Vault / Upload Arrow Centerpiece -->
+    <path d="M31 26.5V36.5M26.5 31L31 26.5L35.5 31" stroke="#0a101d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="31" cy="38" r="1.3" fill="#0a101d"/>
+  </g>
+</svg>

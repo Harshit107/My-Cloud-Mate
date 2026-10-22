@@ -25,11 +25,11 @@ const EmailSenderModal = (props) => {
     try {
       const payload = {
         recipient: trimmedEmail,
-        fileId: props.id,
+        fileId: props.id || props.fileId || props._id,
         fileName: props.name,
         fileType: props.type,
         fileSize: props.size,
-        link: props.link,
+        link: props.link || props.downloadUrl || props.downloadURL,
       };
 
       const data = await handleAPICall(SHARE_FILE_API, "POST", payload);

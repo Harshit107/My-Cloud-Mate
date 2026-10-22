@@ -148,7 +148,7 @@ const LoginPage = (props) => {
           )}
           {showPasswordModal && (
             <ChangePassword
-              removeBackdrop={() => ""}
+              removeBackdrop={handleRemoveBackdrop}
               cancelBackdrop={handleRemoveBackdrop}
             />
           )}

@@ -1,19 +1,20 @@
-import ReactDom from 'react-dom'
-import classes from './Backdrop.module.css'
+import ReactDom from 'react-dom';
+import classes from './Backdrop.module.css';
+
 const Backdrop = (props) => {
+    const handleRemoveBackdrop = (event) => {
+        if (event.target === event.currentTarget && props.removeBackdrop) {
+            props.removeBackdrop();
+        }
+    };
 
-    const handleRemoveBackdrop = () => {
-        props.removeBackdrop();
-    }
-
-    const backDrop = document.getElementById('backdrop');
+    const backDropRoot = document.getElementById('backdrop') || document.body;
     return ReactDom.createPortal(
-        <div className={classes.blur} onClick={handleRemoveBackdrop} >
+        <div className={classes.blur} onClick={handleRemoveBackdrop}>
             {props.children}
         </div>,
-        backDrop
-    )
-
-}
+        backDropRoot
+    );
+};
 
 export default Backdrop;

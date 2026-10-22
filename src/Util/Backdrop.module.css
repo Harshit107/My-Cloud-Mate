@@ -2,11 +2,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #272727b7;
-    height: 100%;
-    width: 100%;
-    position: absolute;
+    background-color: rgba(9, 13, 19, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 5;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    animation: backdropFadeIn 0.2s ease-out;
+}
+
+@keyframes backdropFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

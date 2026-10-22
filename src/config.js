@@ -54,4 +54,6 @@ export const PURCHASE_SESSION = BASE_API_URL + "/payment/checkout";
 export const GET_PRESIGNED_URL_API = BASE_API_URL + "/file/presigned-url";
 export const UPLOAD_NEW_File = BASE_API_URL + "/file/create";
 export const DELETE_File = BASE_API_URL + "/file/delete";
-export const SEMD_EMAIL = "https://email.api.harshit107.tech/public/email/notification";
+export const SHARE_FILE_API = BASE_API_URL + "/file/share";
+export const SEND_EMAIL = SHARE_FILE_API;
+export const SEMD_EMAIL = SHARE_FILE_API;

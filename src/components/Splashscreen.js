@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import classes from "./Splashscreen.module.css";
 import logoImage from "../images/my-cloud-mate-logo.gif";
 import { useNavigate, Link } from "react-router-dom";
@@ -14,11 +14,75 @@ import {
   RiVideoLine,
   RiShareLine,
   RiCheckLine,
+  RiUploadCloud2Line,
+  RiCloudLine,
+  RiBroadcastLine,
+  RiSparklingLine,
+  RiCpuLine,
 } from "react-icons/ri";
+
+// Interactive 3D Tilt Feature Card Component
+const FeatureCard3D = ({ icon, iconBg, iconColor, title, text, tag }) => {
+  const cardRef = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 180, damping: 18 });
+  const mouseYSpring = useSpring(y, { stiffness: 180, damping: 18 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["14deg", "-14deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-14deg", "14deg"]);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className={classes.featureCard3D}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className={classes.featureCardGlow} />
+      <div
+        className={classes.featureIcon3D}
+        style={{ background: iconBg, color: iconColor }}
+      >
+        {icon}
+      </div>
+      <div className={classes.featureCardContent3D}>
+        <div className={classes.featureCardHeaderRow}>
+          <h3 className={classes.featureTitle}>{title}</h3>
+          {tag && <span className={classes.featureTag}>{tag}</span>}
+        </div>
+        <p className={classes.featureText}>{text}</p>
+      </div>
+    </motion.div>
+  );
+};
 
 const SplashScreen = () => {
   const navigate = useNavigate();
   const cardRef = useRef(null);
+  const [perspectiveMode, setPerspectiveMode] = useState("isometric"); // isometric | frontal | deep3d
 
   // 3D Perspective Tilt on Mouse Movement
   const x = useMotionValue(0);
@@ -27,8 +91,20 @@ const SplashScreen = () => {
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["14deg", "-14deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-14deg", "14deg"]);
+  // Base angles by perspective mode
+  const baseRotateX = perspectiveMode === "frontal" ? 4 : perspectiveMode === "deep3d" ? 20 : 12;
+  const baseRotateY = perspectiveMode === "frontal" ? 0 : perspectiveMode === "deep3d" ? -20 : -12;
+
+  const rotateX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    [`${baseRotateX + 10}deg`, `${baseRotateX - 10}deg`]
+  );
+  const rotateY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    [`${baseRotateY - 10}deg`, `${baseRotateY + 10}deg`]
+  );
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -87,8 +163,8 @@ const SplashScreen = () => {
           <a href="#features" className={classes.navLink}>
             Features
           </a>
-          <a href="#storage" className={classes.navLink}>
-            Storage
+          <a href="#vault" className={classes.navLink}>
+            Cloud Vault
           </a>
           <a href="#security" className={classes.navLink}>
             Security
@@ -111,7 +187,7 @@ const SplashScreen = () => {
         >
           <div className={classes.badgePill}>
             <span className={classes.pulseDot} />
-            <span>Next-Gen Cloud Storage & Workspace</span>
+            <span>Next-Gen Cloud Storage & Media Streaming</span>
           </div>
 
           <h1 className={classes.heroTitle}>
@@ -120,7 +196,7 @@ const SplashScreen = () => {
           </h1>
 
           <p className={classes.heroDesc}>
-            Put all your photos, documents, music, and high-definition video in a single blazing-fast workspace. Stream media instantly, collaborate across projects, and enjoy zero-latency cloud access.
+            Unify photos, documents, codebases, and 4K media in an ultra-fast zero-latency workspace. Stream files instantly in-browser, organize project vaults, and enjoy end-to-end encrypted storage.
           </p>
 
           <div className={classes.heroCtaGroup}>
@@ -128,7 +204,7 @@ const SplashScreen = () => {
               onClick={() => navigate("/auth")}
               className={classes.primaryCta}
             >
-              <span>Get Started Free</span>
+              <span>Launch Workspace Free</span>
               <RiArrowRightLine size={18} />
             </button>
 
@@ -138,19 +214,19 @@ const SplashScreen = () => {
             </a>
           </div>
 
-          {/* Social Proof & Metrics Strip */}
+          {/* Social Proof & Metrics Strip (No fake 50 GB) */}
           <div className={classes.heroStats}>
             <div className={classes.statItem}>
-              <span className={classes.statNumber}>50 GB</span>
-              <span className={classes.statLabel}>Free Cloud Quota</span>
+              <span className={classes.statNumber}>Zero-Knowledge</span>
+              <span className={classes.statLabel}>End-to-End Encryption</span>
+            </div>
+            <div className={classes.statItem}>
+              <span className={classes.statNumber}>Unlimited</span>
+              <span className={classes.statLabel}>Workspaces & Vaults</span>
             </div>
             <div className={classes.statItem}>
               <span className={classes.statNumber}>99.999%</span>
-              <span className={classes.statLabel}>Data Durability</span>
-            </div>
-            <div className={classes.statItem}>
-              <span className={classes.statNumber}>&lt; 5ms</span>
-              <span className={classes.statLabel}>Streaming Latency</span>
+              <span className={classes.statLabel}>High Durability Cluster</span>
             </div>
           </div>
         </motion.div>
@@ -162,6 +238,40 @@ const SplashScreen = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
         >
+          {/* 3D View Mode Selector */}
+          <div className={classes.perspectiveSwitcher}>
+            <span className={classes.perspectiveLabel}>
+              <RiSparklingLine size={14} /> 3D View:
+            </span>
+            <button
+              type="button"
+              className={`${classes.perspectiveBtn} ${
+                perspectiveMode === "isometric" ? classes.perspectiveBtnActive : ""
+              }`}
+              onClick={() => setPerspectiveMode("isometric")}
+            >
+              Isometric
+            </button>
+            <button
+              type="button"
+              className={`${classes.perspectiveBtn} ${
+                perspectiveMode === "frontal" ? classes.perspectiveBtnActive : ""
+              }`}
+              onClick={() => setPerspectiveMode("frontal")}
+            >
+              Frontal
+            </button>
+            <button
+              type="button"
+              className={`${classes.perspectiveBtn} ${
+                perspectiveMode === "deep3d" ? classes.perspectiveBtnActive : ""
+              }`}
+              onClick={() => setPerspectiveMode("deep3d")}
+            >
+              Deep 3D
+            </button>
+          </div>
+
           <div className={classes.stage3D}>
             {/* 3D Parallax Tilt Container */}
             <motion.div
@@ -177,26 +287,74 @@ const SplashScreen = () => {
             >
               <div className={classes.cardGlow} />
 
-              {/* Mac-style Window Controls */}
+              {/* Mac-style Window Controls & 3D Hologram Badge */}
               <div className={classes.cardHeader}>
                 <div className={classes.windowDots}>
                   <div className={classes.dotRed} />
                   <div className={classes.dotYellow} />
                   <div className={classes.dotGreen} />
                 </div>
-                <span className={classes.cardTag}>Cloud Workspace 3.0</span>
+
+                {/* 3D Holographic Orbit Gyroscope Badge */}
+                <div className={classes.holoCoreWrapper}>
+                  <div className={classes.holoRingOuter} />
+                  <div className={classes.holoRingInner} />
+                  <RiCloudLine className={classes.holoCloudIcon} />
+                  <span className={classes.holoLabel}>Live Multi-Cloud Vault</span>
+                </div>
+
+                <span className={classes.cardTag}>Engine v3.2</span>
               </div>
 
-              {/* Storage Meter Widget */}
-              <div className={classes.storageWidget} id="storage">
+              {/* Multi-Cloud Distribution & Health Widget (Replacing hardcoded 50 GB) */}
+              <div className={classes.storageWidget} id="vault">
                 <div className={classes.storageHeader}>
-                  <span className={classes.storageTitle}>Active Storage Vault</span>
-                  <span className={classes.storageAmount}>14.8 GB / 50 GB Used</span>
+                  <div className={classes.vaultStatusRow}>
+                    <span className={classes.pulseDotSmall} />
+                    <span className={classes.storageTitle}>Active Ecosystem Distribution</span>
+                  </div>
+                  <span className={classes.storageAmount}>Zero-Knowledge Encrypted</span>
                 </div>
-                <div className={classes.progressBar}>
-                  <div className={classes.progressFill} />
+
+                {/* Multi-Segment Distribution Bar */}
+                <div className={classes.distributionBar}>
+                  <div className={classes.segMedia} title="Media Assets (48%)" />
+                  <div className={classes.segDocs} title="Documents & PDFs (28%)" />
+                  <div className={classes.segVaults} title="Code & Project Vaults (24%)" />
+                </div>
+
+                {/* Distribution Legend Tags */}
+                <div className={classes.distLegend}>
+                  <span className={classes.legendItem}>
+                    <span className={classes.legendDotMedia} /> Media (48%)
+                  </span>
+                  <span className={classes.legendItem}>
+                    <span className={classes.legendDotDocs} /> Documents (28%)
+                  </span>
+                  <span className={classes.legendItem}>
+                    <span className={classes.legendDotVaults} /> Vaults (24%)
+                  </span>
                 </div>
               </div>
+
+              {/* Interactive 3D Holographic Drag & Drop Station */}
+              <motion.div
+                className={classes.dropzone3D}
+                whileHover={{ y: -3, scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => navigate("/auth")}
+              >
+                <div className={classes.dropzoneIconWrapper}>
+                  <RiUploadCloud2Line size={24} />
+                </div>
+                <div className={classes.dropzoneText}>
+                  <span className={classes.dropzoneTitle}>Interactive 3D Dropzone</span>
+                  <span className={classes.dropzoneSub}>
+                    Drop files anywhere to encrypt & stream • Zero compression
+                  </span>
+                </div>
+                <span className={classes.dropzoneAction}>Upload</span>
+              </motion.div>
 
               {/* Live Interactive Files List */}
               <div className={classes.fileGrid}>
@@ -209,8 +367,8 @@ const SplashScreen = () => {
                       <RiFilePdfLine />
                     </div>
                     <div>
-                      <div className={classes.fileName}>Product_Roadmap_2026.pdf</div>
-                      <div className={classes.fileMeta}>3.2 MB · Modified 2m ago</div>
+                      <div className={classes.fileName}>Product_Architecture_2026.pdf</div>
+                      <div className={classes.fileMeta}>Encrypted Vault · Synchronized</div>
                     </div>
                   </div>
                   <div className={classes.fileStatus}>
@@ -227,8 +385,8 @@ const SplashScreen = () => {
                       <RiFolderZipLine />
                     </div>
                     <div>
-                      <div className={classes.fileName}>Design_System_Assets.zip</div>
-                      <div className={classes.fileMeta}>48.5 MB · Uploaded by team</div>
+                      <div className={classes.fileName}>Design_System_Tokens.zip</div>
+                      <div className={classes.fileMeta}>Project Workspace · Multi-Cloud</div>
                     </div>
                   </div>
                   <div className={classes.fileStatus}>
@@ -246,11 +404,11 @@ const SplashScreen = () => {
                     </div>
                     <div>
                       <div className={classes.fileName}>Keynote_Demo_4K.mp4</div>
-                      <div className={classes.fileMeta}>1.2 GB · Ready to Stream</div>
+                      <div className={classes.fileMeta}>Direct Stream · Lossless P2P</div>
                     </div>
                   </div>
                   <div className={classes.fileStatus} style={{ color: "#38bdf8" }}>
-                    ● Streaming
+                    <RiBroadcastLine size={14} /> Live Stream
                   </div>
                 </div>
               </div>
@@ -285,102 +443,89 @@ const SplashScreen = () => {
                   <div className={classes.badgeSub}>Zero-Knowledge Encrypted</div>
                 </div>
               </motion.div>
+
+              {/* Floating 3D Badge 3: Lossless P2P Stream */}
+              <motion.div
+                className={classes.floatingBadgeP2P}
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <div className={classes.p2pIconWrapper}>
+                  <RiCpuLine size={20} />
+                </div>
+                <div>
+                  <div className={classes.badgeValue}>&lt; 5ms Direct</div>
+                  <div className={classes.badgeSub}>P2P Edge Mesh</div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* Feature Showcase Grid Section */}
+      {/* Feature Showcase Grid Section with 3D Tilt Cards */}
       <section id="features" className={classes.featuresSection}>
         <div className={classes.featuresHeader}>
+          <div className={classes.badgePill} style={{ margin: "0 auto 16px" }}>
+            <RiSparklingLine size={16} />
+            <span>Interactive 3D Engine</span>
+          </div>
           <h2 className={classes.featuresSectionTitle}>
             Engineered For Seamless File Collaboration
           </h2>
           <p className={classes.featuresSectionSub}>
-            Everything you need to backup files, organize project folders, and stream high-res media anywhere in the world.
+            Hover across cards to explore real 3D depth, responsive tilt physics, and zero-compromise cloud security.
           </p>
         </div>
 
         <div className={classes.featuresGrid}>
           {/* Feature 1 */}
-          <motion.div
-            className={classes.featureCard}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div
-              className={classes.featureIcon}
-              style={{ background: "rgba(2, 180, 165, 0.15)", color: "#04e9d6" }}
-            >
-              <RiHardDrive2Line />
-            </div>
-            <h3 className={classes.featureTitle}>Universal Cloud Storage</h3>
-            <p className={classes.featureText}>
-              Store documents, high-res photos, 4K videos, audio, and archives with automated cloud sync and instant recovery.
-            </p>
-          </motion.div>
+          <FeatureCard3D
+            icon={<RiHardDrive2Line />}
+            iconBg="rgba(2, 180, 165, 0.15)"
+            iconColor="#04e9d6"
+            title="Universal Cloud Vaults"
+            text="Store photos, 4K media, PDFs, and deep archive datasets with zero compression loss and instant multi-region recovery."
+            tag="3D Core"
+          />
 
           {/* Feature 2 */}
-          <motion.div
-            className={classes.featureCard}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div
-              className={classes.featureIcon}
-              style={{ background: "rgba(37, 99, 235, 0.15)", color: "#38bdf8" }}
-            >
-              <RiFolderZipLine />
-            </div>
-            <h3 className={classes.featureTitle}>Project-Centric Spaces</h3>
-            <p className={classes.featureText}>
-              Organize your assets into dedicated project vaults. Filter, sort, and search across thousands of files in milliseconds.
-            </p>
-          </motion.div>
+          <FeatureCard3D
+            icon={<RiFolderZipLine />}
+            iconBg="rgba(37, 99, 235, 0.15)"
+            iconColor="#38bdf8"
+            title="Project-Centric Spaces"
+            text="Organize team resources into isolated cryptographic vaults. Filter, tag, and locate any project file in sub-millisecond queries."
+            tag="Vaults"
+          />
 
           {/* Feature 3 */}
-          <motion.div
-            className={classes.featureCard}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div
-              className={classes.featureIcon}
-              style={{ background: "rgba(139, 92, 246, 0.15)", color: "#a78bfa" }}
-            >
-              <RiVideoLine />
-            </div>
-            <h3 className={classes.featureTitle}>Instant In-Browser Player</h3>
-            <p className={classes.featureText}>
-              Stream videos, listen to music tracks, and preview PDF or image documents right inside your browser with zero downloads.
-            </p>
-          </motion.div>
+          <FeatureCard3D
+            icon={<RiVideoLine />}
+            iconBg="rgba(139, 92, 246, 0.15)"
+            iconColor="#a78bfa"
+            title="In-Browser Media Player"
+            text="Stream 4K high-bitrate video, listen to lossless audio, and view document manifests directly in-browser with zero wait."
+            tag="Lossless"
+          />
 
           {/* Feature 4 */}
-          <motion.div
-            className={classes.featureCard}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div
-              className={classes.featureIcon}
-              style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399" }}
-            >
-              <RiShareLine />
-            </div>
-            <h3 className={classes.featureTitle}>One-Click Sharing</h3>
-            <p className={classes.featureText}>
-              Share files and project folders via secure email invitations powered by FreelyEmail notifications and access controls.
-            </p>
-          </motion.div>
+          <FeatureCard3D
+            icon={<RiShareLine />}
+            iconBg="rgba(16, 185, 129, 0.15)"
+            iconColor="#34d399"
+            title="Instant Secure Sharing"
+            text="Share files and project directories with time-expiring cryptographic invitations, granular read/write permissions, and tracking."
+            tag="Sharing"
+          />
         </div>
       </section>
 
-      {/* Modern Call to Action Banner */}
+      {/* Modern Call to Action Banner (No fake 50 GB) */}
       <div className={classes.ctaBanner}>
         <div className={classes.ctaText}>
-          <h3>Ready to elevate your cloud storage?</h3>
-          <p>Get started with 50 GB of secure storage. No credit card required.</p>
+          <h3>Ready to elevate your cloud workspace?</h3>
+          <p>Instant setup. Zero-knowledge encrypted vaults & lightning media streaming. Free forever.</p>
         </div>
         <button
           onClick={() => navigate("/auth")}

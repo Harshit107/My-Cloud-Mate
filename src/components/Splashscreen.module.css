@@ -306,9 +306,56 @@
     flex: 1;
     min-width: 340px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     perspective: 1200px;
+}
+
+/* 3D Perspective Mode Selector */
+.perspectiveSwitcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(13, 17, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px 8px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(10px);
+}
+
+.perspectiveLabel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94a3b8;
+    padding: 0 6px;
+}
+
+.perspectiveBtn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.perspectiveBtn:hover {
+    color: #ffffff;
+}
+
+.perspectiveBtnActive {
+    background: rgba(2, 180, 165, 0.2);
+    color: #04e9d6;
+    border: 1px solid rgba(4, 233, 214, 0.35);
+    box-shadow: 0 0 10px rgba(4, 233, 214, 0.2);
 }
 
 .stage3D {
@@ -345,7 +392,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    transform: translateZ(25px);
+    transform: translateZ(30px);
 }
 
 .windowDots {
@@ -374,6 +421,65 @@
     background: #22c55e;
 }
 
+/* 3D Holographic Orbit Gyroscope Badge */
+.holoCoreWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 4px 14px 4px 30px;
+    background: rgba(2, 180, 165, 0.08);
+    border: 1px solid rgba(4, 233, 214, 0.2);
+    border-radius: 20px;
+}
+
+.holoRingOuter {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px dashed rgba(4, 233, 214, 0.6);
+    border-radius: 50%;
+    animation: holoSpin 6s linear infinite;
+    left: 4px;
+}
+
+.holoRingInner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(167, 139, 250, 0.6);
+    border-radius: 50%;
+    animation: holoSpinReverse 4s linear infinite;
+    left: 8px;
+}
+
+@keyframes holoSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes holoSpinReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+.holoCloudIcon {
+    font-size: 1rem;
+    color: #04e9d6;
+    z-index: 2;
+    filter: drop-shadow(0 0 6px #04e9d6);
+    position: absolute;
+    left: 7px;
+}
+
+.holoLabel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    letter-spacing: 0.02em;
+    z-index: 2;
+}
+
 .cardTag {
     font-size: 0.75rem;
     font-weight: 600;
@@ -386,14 +492,14 @@
     border: 1px solid rgba(4, 233, 214, 0.25);
 }
 
-/* Storage Meter Widget inside 3D Card */
+/* Cloud Vault & Ecosystem Distribution Widget */
 .storageWidget {
     background: rgba(13, 17, 23, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 16px;
-    margin-bottom: 18px;
-    transform: translateZ(35px);
+    margin-bottom: 16px;
+    transform: translateZ(40px);
 }
 
 .storageHeader {
@@ -404,30 +510,170 @@
     font-size: 0.85rem;
 }
 
+.vaultStatusRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pulseDotSmall {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+}
+
 .storageTitle {
     color: #cbd5e1;
     font-weight: 600;
+    font-size: 0.82rem;
 }
 
 .storageAmount {
     color: #04e9d6;
     font-weight: 700;
+    font-size: 0.78rem;
 }
 
-.progressBar {
+.distributionBar {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
     overflow: hidden;
+    display: flex;
+    margin-bottom: 10px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.progressFill {
-    width: 32%;
+.segMedia {
+    width: 48%;
     height: 100%;
     background: linear-gradient(90deg, #02b4a5, #04e9d6);
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(4, 233, 214, 0.5);
+    box-shadow: 0 0 8px rgba(4, 233, 214, 0.5);
+}
+
+.segDocs {
+    width: 28%;
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+    box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+}
+
+.segVaults {
+    width: 24%;
+    height: 100%;
+    background: linear-gradient(90deg, #059669, #34d399);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+}
+
+.distLegend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legendDotMedia {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #04e9d6;
+    box-shadow: 0 0 5px #04e9d6;
+}
+
+.legendDotDocs {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a78bfa;
+    box-shadow: 0 0 5px #a78bfa;
+}
+
+.legendDotVaults {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 5px #34d399;
+}
+
+/* Interactive 3D Holographic Dropzone */
+.dropzone3D {
+    background: rgba(2, 180, 165, 0.05);
+    border: 1px dashed rgba(4, 233, 214, 0.4);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transform: translateZ(50px);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dropzone3D:hover {
+    background: rgba(2, 180, 165, 0.12);
+    border-color: #04e9d6;
+    box-shadow: 0 10px 25px rgba(2, 180, 165, 0.2);
+    transform: translateZ(60px);
+}
+
+.dropzoneIconWrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(4, 233, 214, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #04e9d6;
+    flex-shrink: 0;
+}
+
+.dropzoneText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropzoneTitle {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.dropzoneSub {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 1px;
+}
+
+.dropzoneAction {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #04e9d6;
+    background: rgba(4, 233, 214, 0.15);
+    border: 1px solid rgba(4, 233, 214, 0.35);
+    padding: 4px 10px;
+    border-radius: 6px;
 }
 
 /* File Preview List inside 3D Card */
@@ -504,7 +750,7 @@
     align-items: center;
     gap: 14px;
     backdrop-filter: blur(16px);
-    transform: translateZ(75px);
+    transform: translateZ(85px);
     z-index: 20;
 }
 
@@ -546,7 +792,7 @@
     align-items: center;
     gap: 14px;
     backdrop-filter: blur(16px);
-    transform: translateZ(90px);
+    transform: translateZ(95px);
     z-index: 20;
 }
 
@@ -561,7 +807,36 @@
     color: #38bdf8;
 }
 
-/* Features Grid Section */
+/* Floating 3D Badge 3: Lossless P2P Stream */
+.floatingBadgeP2P {
+    position: absolute;
+    bottom: -32px;
+    left: -20px;
+    background: rgba(13, 17, 23, 0.94);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(52, 211, 153, 0.2);
+    border-radius: 18px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    backdrop-filter: blur(16px);
+    transform: translateZ(85px);
+    z-index: 20;
+}
+
+.p2pIconWrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(16, 185, 129, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34d399;
+}
+
+/* Features Grid Section with Interactive 3D Tilt Cards */
 .featuresSection {
     max-width: 1240px;
     width: 100%;
@@ -596,41 +871,78 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
+    perspective: 1200px;
 }
 
-.featureCard {
-    background: rgba(21, 26, 33, 0.65);
+/* 3D Tilt Feature Card */
+.featureCard3D {
+    background: linear-gradient(145deg, rgba(21, 26, 33, 0.75) 0%, rgba(13, 17, 23, 0.9) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
+    border-radius: 20px;
     padding: 28px;
     backdrop-filter: blur(16px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
+    cursor: default;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.featureCard:hover {
-    background: rgba(30, 38, 48, 0.75);
-    border-color: rgba(4, 233, 214, 0.3);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(2, 180, 165, 0.15);
+.featureCard3D:hover {
+    border-color: rgba(4, 233, 214, 0.35);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(2, 180, 165, 0.2);
 }
 
-.featureIcon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
+.featureCardGlow {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(circle at top right, rgba(4, 233, 214, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.featureIcon3D {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    transform: translateZ(40px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.featureCardContent3D {
+    transform: translateZ(25px);
+}
+
+.featureCardHeaderRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.featureTag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #04e9d6;
+    background: rgba(2, 180, 165, 0.12);
+    border: 1px solid rgba(4, 233, 214, 0.25);
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .featureTitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff;
-    margin: 0 0 10px 0;
+    margin: 0;
 }
 
 .featureText {
@@ -715,6 +1027,10 @@
     .floatingBadgeSecurity {
         right: 0;
     }
+
+    .floatingBadgeP2P {
+        left: 0;
+    }
 }
 
 @media (max-width: 600px) {
@@ -727,7 +1043,8 @@
     }
 
     .floatingBadgeSpeed,
-    .floatingBadgeSecurity {
+    .floatingBadgeSecurity,
+    .floatingBadgeP2P {
         position: static;
         margin-top: 16px;
         transform: none;
@@ -739,3 +1056,4 @@
         justify-content: center;
     }
 }
+

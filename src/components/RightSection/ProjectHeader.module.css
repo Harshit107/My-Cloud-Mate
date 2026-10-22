@@ -1,71 +1,68 @@
-
 .button {
     width: fit-content;
-    margin-right: 20px;
+    margin-right: 12px;
 }
 
 .project-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 5px 10px 15px 10px;
+    align-items: center;
+    margin: 8px 10px 20px 10px;
     height: fit-content;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .project-header-action {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
+    align-items: center;
+    gap: 10px;
 }
 
 .project-header-action-delete {
-    background-color: rgb(199, 28, 28);
-    box-shadow: -2px 2px 2px #807e7e;
-    padding-right:  0px;
-    border: none;
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ffffff;
 }
 
 .project-header-action-delete:hover,
 .project-header-action-delete:active {
-    background-color: rgb(150, 21, 21);
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
-
 
 .enable {
-    display: block;
-    width: fit-content;
-    height: 0px ;
-    transition: 0.3s ease;
     display: none;
-
+    width: fit-content;
+    height: 0px;
+    transition: 0.3s ease;
 }
-
 
 .filter {
     display: block;
 }
 
-
 .hamburger {
   visibility: hidden;
-  color: wheat;
-  padding: 5px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
+  color: #04e9d6;
+  padding: 8px;
+  background: rgba(21, 26, 33, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
   width: 40px;
   height: 40px;
-  margin-top: 20px;
-  margin-right: 20px;
-
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
 @media (max-width: 700px) {
-
   .hamburger {
     visibility: visible;
-    
   }
 }

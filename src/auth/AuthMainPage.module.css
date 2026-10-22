@@ -1,111 +1,151 @@
 .authContainer {
     width: 100vw;
-    height: 100vh;
-    background: 
-    linear-gradient(to right, #2929281c, #29282848), /* Gradient Layer */
-    url('../images/splashscreen.svg') center/cover;
-    object-fit: unset;
-    padding: 0px;
-    margin: 0px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    min-height: 100vh;
+    background: #0d1117;
+    position: relative;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
+
+.authContainer::before {
+    content: "";
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(2, 180, 165, 0.22) 0%, rgba(2, 180, 165, 0.03) 50%, transparent 70%);
+    filter: blur(90px);
+    top: -100px;
+    left: -100px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.authContainer::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+    filter: blur(90px);
+    bottom: -100px;
+    right: -100px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.wrapper {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+
 .main {
-    width: 50%;
-    height: 100%;
+    flex: 1;
+    min-width: 320px;
+    max-width: 480px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
+
+.authCard {
+    width: 100%;
+    background: linear-gradient(145deg, rgba(25, 30, 36, 0.8) 0%, rgba(13, 17, 23, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(2, 180, 165, 0.15);
+    backdrop-filter: blur(20px);
+    box-sizing: border-box;
+}
+
 .welcomeMessage {
-    width: 50%;
-    height: 100%;
+    flex: 1.1;
+    min-width: 320px;
     display: flex;
-    padding-top: 150px;
-    padding-right: 50px;
     flex-direction: column;
 }
+
+.badgePill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(2, 180, 165, 0.12);
+    border: 1px solid rgba(4, 233, 214, 0.28);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #04e9d6;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
 .title {
-    margin: 10px 30px 0 0;
-    color: #f0f0f0;
-    text-align: center;
-    font-size: 40px;
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    margin: 0 0 16px 0;
 }
+
 .p {
-    margin-top: 10px;
-    color : #d8d8d8;
-    font-size: 20px;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 28px 0;
+    max-width: 480px;
 }
+
 .mate {
-    color : var(--text-2)
-}
-.loginContainer {
-    position: absolute;
-    width: 60%;
-    height: 90%;
-    border-radius: 30px;
-    border: 0.5px solid var(--text-2);
-    z-index: 1;
-
-
+    background: linear-gradient(135deg, #02b4a5 0%, #04e9d6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.signupContainer {
-    position: absolute;
-    width: 60%;
-    height: 90%;
-    z-index:0;
-    border: 0.5px solid var(--text-2);
-    border-radius: 30px;
-    
-}
-
-.animationSlideDown {
+.backHomeLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
     cursor: pointer;
-    animation: go-to-back 1s ease-in-out; /* Use the animation name here */
-   
 }
 
-@keyframes go-to-back {
-    0% {
-        transform: translateX(0px) scale(1.0);
-    }
-    50% {
-        transform: translateX(100%) scale(0.9);
-    }
-    100% {
-        transform: translateX(0px) scale(0.95);
-        
-    }
+.backHomeLink:hover {
+    color: #04e9d6;
 }
 
-
-@media (max-width: 700px) {
-  /* Your styles for heights less than 650 pixels go here */
-  /* For example, you could change the background color */
-
-  .welcomeMessage {
-    width: 0%;
-    overflow: hidden;
-    visibility: hidden;
-    padding: 0px;
-  }
-
-  .main {
-    width: 100%;
-  }
-  .loginContainer {
-    width: 80%;
-    height: 80%;
-  }  
-  .signupContainer {
-    width: 80%;
-    height: 80%;
-  }
-    
+@media (max-width: 800px) {
+    .wrapper {
+        flex-direction: column-reverse;
+        gap: 32px;
+    }
+    .welcomeMessage {
+        text-align: center;
+        align-items: center;
+    }
+    .title {
+        font-size: 2.2rem;
+    }
+    .main {
+        max-width: 100%;
+    }
 }

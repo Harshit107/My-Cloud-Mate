@@ -27,9 +27,27 @@ const isLocalhost = Boolean(
       ))
 );
 
-const BASE_API_URL = isLocalhost
-  ? "http://localhost:3001"
-  : DOMAINS.CLOUD_MATE.API;
+const getBaseApiUrl = () => {
+  let apiUrl = process.env.REACT_APP_API_URL;
+  if (apiUrl && apiUrl.trim()) {
+    let cleanUrl = apiUrl.trim().replace(/^https?:\/\/+/i, "https://");
+    if (!/^https?:\/\//i.test(cleanUrl)) {
+      cleanUrl = `https://${cleanUrl}`;
+    }
+    return cleanUrl.replace(/\/+$/, "");
+  }
+  if (isLocalhost) {
+    return "http://localhost:3001";
+  }
+  let fallback = DOMAINS.CLOUD_MATE.API || "https://mycloudmate-api.harshit107.online";
+  fallback = fallback.trim().replace(/^https?:\/\/+/i, "https://");
+  if (!/^https?:\/\//i.test(fallback)) {
+    fallback = `https://${fallback}`;
+  }
+  return fallback.replace(/\/+$/, "");
+};
+
+const BASE_API_URL = getBaseApiUrl();
 
 // Auth & Users
 export const REGISTRATION_API = BASE_API_URL + "/users/create";

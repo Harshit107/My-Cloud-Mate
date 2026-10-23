@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useEffect } from "react";
 import FileContext from "../../store/file-context";
-import useFileUploader from "../../db/useFileUploader";
+import { useStorageUploader } from "../../upload";
 import { currentTimestamp } from "../../Helper/Moment";
 import Button from "../Button";
 import classes from "./ModalCommonStyling.module.css";
@@ -21,15 +21,13 @@ let isFileSetToDatabase = false;
 const ProjectDetailModelData = (props) => {  
   const ctx = useContext(FileContext);
 
-  
-
   const {
     isFileUploading,
     isUploadingCompleted,
     handleUploadFile: uploadMyFile,
     uploadProgress,
     downloadURL,
-  } = useFileUploader();
+  } = useStorageUploader();
 
   let { error, handleAPICall } = useServer();
   if (props.selectedFile.size > 5000000) {
@@ -65,7 +63,8 @@ const ProjectDetailModelData = (props) => {
         const result = await handleAPICall(UPLOAD_NEW_File, "POST", fileDetail);
         if (!result) return;
         props.removeBackdrop();
-        ctx.addNewFile({ ...fileDetail, ...result.file });
+        const savedFile = result.data || result.file || {};
+        ctx.addNewFile({ ...fileDetail, ...savedFile });
       } else if (props.isProfileImage) {
         const result = await handleAPICall(
           UPLOAD_PROFILE_IMAGE,
@@ -79,7 +78,8 @@ const ProjectDetailModelData = (props) => {
         const result = await handleAPICall(UPLOAD_NEW_File, "POST", fileDetail);
         if (!result) return;
         props.removeBackdrop();
-        ctx.addNewFile({ ...fileDetail, ...result.file });
+        const savedFile = result.data || result.file || {};
+        ctx.addNewFile({ ...fileDetail, ...savedFile });
       }
     }
   }, [ctx, props, handleAPICall, downloadURL]);

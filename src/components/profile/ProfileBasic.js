@@ -31,14 +31,16 @@ const ProfileBasic = () => {
             reset();
         }
         if (data) {
-            if (typeof data.message === 'object') {
-                setProfileData(data.message)            }
-            else
-                toast.success(data.message)
+            const userObj = (data.data && typeof data.data === 'object' && data.data.user) || data.data || data.message;
+            if (typeof userObj === 'object' && userObj !== null) {
+                setProfileData(userObj);
+            } else if (data.message) {
+                toast.success(data.message);
+            }
             reset();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, reset, error])
+    }, [data, reset, error]);
 
 
     // function handleEditClicked() {

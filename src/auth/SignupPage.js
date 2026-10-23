@@ -60,14 +60,15 @@ const SignupPage = (props) => {
     };
 
     useEffect(() => {
-
-        if(serverData) {
-            setTokenToLocalStorage(serverData.token)
-            toast.success("Account created successfully")
-            navigate('/')
+        if (serverData) {
+            const token = serverData.data?.token || serverData.token;
+            if (token) {
+                setTokenToLocalStorage(token);
+                toast.success("Account created successfully");
+                navigate('/');
+            }
         }
-
-    },[serverData, navigate])
+    }, [serverData, navigate]);
 
 
 

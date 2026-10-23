@@ -62,16 +62,20 @@ const LoginPage = (props) => {
 
     useEffect(() => {
         if (serverData) {
-            setTokenToLocalStorage(serverData.token)
-            toast.success(`Welcome back, ${serverData.user.name}`)
-            navigate('/')
+            const token = serverData.data?.token || serverData.token;
+            const user = serverData.data?.user || serverData.user;
+            if (token) {
+                setTokenToLocalStorage(token);
+                toast.success(`Welcome back, ${user?.name || "User"}`);
+                navigate('/');
+            }
         }
         if (serverError) {
-            if (serverError.toLowerCase().includes('not verified'))
-                setEmailIsVerified(false)
-
+            if (String(serverError).toLowerCase().includes('not verified')) {
+                setEmailIsVerified(false);
+            }
         }
-    }, [serverData, navigate, serverError])
+    }, [serverData, navigate, serverError]);
 
     function handleRemoveBackdrop(){
         setShowPasswordModal(false);
@@ -144,7 +148,7 @@ const LoginPage = (props) => {
           )}
           {showPasswordModal && (
             <ChangePassword
-              removeBackdrop={() => ""}
+              removeBackdrop={handleRemoveBackdrop}
               cancelBackdrop={handleRemoveBackdrop}
             />
           )}

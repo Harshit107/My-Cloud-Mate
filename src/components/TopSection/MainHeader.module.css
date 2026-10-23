@@ -1,46 +1,85 @@
 .header-container {
   display: flex;
   flex-direction: row;
-  max-height: 140px;
+  height: 72px;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 0 24px;
   gap: 20px;
-  background-image: linear-gradient(0deg, var(--bg-1), rgb(14, 14, 14),#000);
-  /* background: var(--bg-1); */
-  /* background: url('../../images/bg-img.jfif'); */
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
 }
-.logo-img {
-  max-height: 65px;
-  max-width: 65px;
-  padding: 0px 5px;
-  padding-top: 5px;
-}
-.user-img {
-  max-height: 40px;
-  max-width: 40px;
-  padding: 0px 5px;
-  padding-top: 5px;
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.brandText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+}
+
+.brandMate {
+  background: linear-gradient(135deg, #02b4a5 0%, #04e9d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.user {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  object-fit: cover;
+}
+
+.user-img:hover {
+  transform: scale(1.08);
+  border-color: #04e9d6;
+  box-shadow: 0 0 12px rgba(4, 233, 214, 0.3);
 }
 
 .userContentContainer {
   position: absolute;
+  top: 50px;
   right: 0;
+  z-index: 200;
 }
-
 
 @media (max-width: 600px) {
-  /* Adjust the breakpoint and styles for smaller screens */
-  .logo-img {
-    max-width: 30px;
-  }
   .header-container {
-    padding-left: 10px;
+    padding: 0 12px;
   }
-  .user-img {
-  max-height: 25px;
-  max-width: 25px;
-
-}
+  .brandText {
+    display: none;
+  }
 }

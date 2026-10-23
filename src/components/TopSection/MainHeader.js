@@ -1,40 +1,44 @@
-import Circle from '../../Util/Circle';
-import gifLogo from '../../images/my-cloud-mate-logo.gif'
-import userImage from '../../images/user.png';
-import classes from './MainHeader.module.css'
-import Search from './Search';
-import ProfileSectionList from './ProfileSectionList'
-import { useState } from 'react';
+import React, { useState } from "react";
+import gifLogo from "../../images/my-cloud-mate-logo.gif";
+import userImage from "../../images/user.png";
+import classes from "./MainHeader.module.css";
+import Search from "./Search";
+import ProfileSectionList from "./ProfileSectionList";
+import { Link } from "react-router-dom";
 
-const MainHeader = (props) => {
-
+const MainHeader = () => {
   const [displayProfileSection, setDisplayProfileSection] = useState(false);
 
   return (
-    <div className={classes["header-container"]}>
-      <Circle>
+    <header className={classes["header-container"]}>
+      <Link to="/" className={classes.logoGroup}>
         <img
           src={gifLogo}
-          alt="Website logo"
+          alt="MyCloudMate Logo"
           className={classes["logo-img"]}
         />
-      </Circle>
-      <Search />
-      <div className={classes.user} >
-        <Circle>
-          <img
-            src={userImage}
-            alt="Website logo"
-            className={classes["user-img"]}
-            onClick={ () => setDisplayProfileSection(!displayProfileSection)}
-          />
-        </Circle>
-        {displayProfileSection && <div className={classes.userContentContainer} >
-            <ProfileSectionList />
-        </div>}
-      </div>
+        <span className={classes.brandText}>
+          MyCloud<span className={classes.brandMate}>Mate</span>
+        </span>
+      </Link>
 
-    </div>
+      <Search />
+
+      <div className={classes.user}>
+        <img
+          src={userImage}
+          alt="User Profile"
+          className={classes["user-img"]}
+          onClick={() => setDisplayProfileSection(!displayProfileSection)}
+        />
+        {displayProfileSection && (
+          <div className={classes.userContentContainer}>
+            <ProfileSectionList />
+          </div>
+        )}
+      </div>
+    </header>
   );
-}
+};
+
 export default MainHeader;

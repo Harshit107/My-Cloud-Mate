@@ -3,62 +3,66 @@ import classes from "./ModalCommonStyling.module.css";
 import Input from "../Input";
 import Button from "../Button";
 import { useState } from "react";
-// import { toast } from 'react-toastify';
-
-import { APP_EMAIL, APP_NAME, REPLY_TO, SEMD_EMAIL } from "../../config";
-import { getFileSharingTemplate } from "../../template/FileShare";
+import { SHARE_FILE_API } from "../../config";
 import useServer from "../../db/useServer";
 import { toast } from "react-toastify";
 
 const EmailSenderModal = (props) => {
   const [email, setEmail] = useState("");
-  const {handleAPICall, isLoading, error} = useServer()
+  const { handleAPICall, isLoading, error } = useServer();
 
   function handleValueChange(e) {
     setEmail(e.target.value);
   }
 
   async function handleSendEmail() {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      toast.error("Please enter a valid recipient email address");
+      return;
+    }
+
     try {
-      const msg = {
-        sender: APP_EMAIL,
-        replyTo: REPLY_TO,
-        recipient: email,
-        app: APP_NAME,
-        subject: `File shared : ${props.name}`,
-        message: `A File has been shared with you : Name :  ${props.name} </br> Size : ${props.size} `,
-        HTMLfile: getFileSharingTemplate(props.name, props.type, props.size, props.link),
+      const payload = {
+        recipient: trimmedEmail,
+        fileId: props.id || props.fileId || props._id,
+        fileName: props.name,
+        fileType: props.type,
+        fileSize: props.size,
+        link: props.link || props.downloadUrl || props.downloadURL,
       };
-      const data = await handleAPICall(SEMD_EMAIL,'POST',msg)
-      if(data) {
-        toast.success("Email sent successfully");
+
+      const data = await handleAPICall(SHARE_FILE_API, "POST", payload);
+      if (data) {
+        toast.success("File shared successfully via email");
         props.removeBackdrop();
       }
-
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.error("Failed to share file via email:", err);
     }
   }
 
   const inputData = {
     input: {
-      name: "Email Address",
+      name: "Recipient Email Address",
       type: "email",
-      placeholder: " ",
+      placeholder: "user@example.com",
       value: email,
       onChange: handleValueChange,
+      autoFocus: true,
     },
   };
 
   return (
-    <Modal removeBackdrop={props.removeBackdrop} title="Send Email">
+    <Modal removeBackdrop={props.removeBackdrop} title="Share File via Email">
       <p className={classes.p}>
-        Enter your Email id to receive your download url
+        Enter the recipient&apos;s email address to send a secure download link for{" "}
+        <strong style={{ color: "#38bdf8" }}>{props.name || "this file"}</strong>.
       </p>
       <Input input={inputData.input} />
       {error && <p className={classes.error}>{error}</p>}
       {isLoading && (
-        <p className={classes.info}>Sending Email, please wait...</p>
+        <p className={classes.info}>Sending email via FreelyEmail, please wait...</p>
       )}
       <div className={classes.btnDiv}>
         <Button
@@ -68,7 +72,6 @@ const EmailSenderModal = (props) => {
           disabled={isLoading}
           className={`${classes.btn} ${classes.cancelBtn}`}
         >
-          {" "}
           Cancel
         </Button>
         <Button
@@ -76,7 +79,7 @@ const EmailSenderModal = (props) => {
           disabled={isLoading}
           className={classes.btn}
         >
-          Send
+          {isLoading ? "Sending..." : "Send Email"}
         </Button>
       </div>
     </Modal>

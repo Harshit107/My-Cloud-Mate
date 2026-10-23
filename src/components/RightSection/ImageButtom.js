@@ -36,11 +36,14 @@ export default function ImageButtom(props) {
       {isPaymentMode && <PaymentModal removeBackdrop = {() => setPaymentMode(false)} />}
       {isMailModelOpen && (
         <EmailSenderModel
+          id={props._id || props.id}
+          fileId={props._id || props.id}
           name={props.name}
-          link={props.downloadUrl}
+          link={props.downloadUrl || props.downloadURL || props.link}
+          downloadUrl={props.downloadUrl || props.downloadURL || props.link}
           type={props.type}
           size={props.size}
-          removeBackdrop = {() => setMailModelOpen(false)}
+          removeBackdrop={() => setMailModelOpen(false)}
         />
       )}
     </div>

@@ -30,7 +30,16 @@ const isLocalhost = Boolean(
 const getBaseApiUrl = () => {
   let apiUrl = process.env.REACT_APP_API_URL;
   if (apiUrl && apiUrl.trim()) {
-    let cleanUrl = apiUrl.trim().replace(/^https?:\/\/+/i, "https://");
+    let cleanUrl = apiUrl.trim();
+    // Sanitize any stale or legacy backend domain configured in hosting environment
+    if (
+      cleanUrl.includes("harshit107.in") ||
+      cleanUrl.includes("mycloudmate.api") ||
+      cleanUrl.includes("trimurl.online")
+    ) {
+      return "https://mycloudmate-api.harshit107.online";
+    }
+    cleanUrl = cleanUrl.replace(/^https?:\/\/+/i, "https://");
     if (!/^https?:\/\//i.test(cleanUrl)) {
       cleanUrl = `https://${cleanUrl}`;
     }
